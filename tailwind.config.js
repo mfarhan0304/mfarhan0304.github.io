@@ -27,15 +27,6 @@ export default {
         '8': '8px',
         '16': '16px',
         '1100': '1100px',
-      },
-      animation: {
-        'sakura': 'sakuraFall 4s linear forwards',
-      },
-      keyframes: {
-        sakuraFall: {
-          '0%': { transform: 'translateY(-10vh) translateX(0) rotate(0deg)', opacity: 1 },
-          '100%': { transform: 'translateY(100vh) translateX(-100vw) rotate(360deg)', opacity: 0 },
-        }
       }
     },
   },

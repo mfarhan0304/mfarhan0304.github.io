@@ -40,7 +40,7 @@ const ProjectCard = ({ title, description, image, tech, links, size = 'md' }) =>
   </div>
 );
 
-const ExperienceAccordion = ({ role, company, period, description, tech, location, website, isOpen, onToggle }) => (
+const ExperienceAccordion = ({ role, period, description, tech, location, website, isOpen, onToggle }) => (
   <div className="mb-6">
     <button
       onClick={onToggle}
@@ -52,7 +52,6 @@ const ExperienceAccordion = ({ role, company, period, description, tech, locatio
     >
       <div className="flex-1">
         <h3 className="text-h3 font-semibold text-left tracking-wide">{role}</h3>
-        <p className={`${isOpen ? 'text-white/90' : 'text-rose'} font-medium`}>{company}</p>
       </div>
       <div className="flex items-center gap-6">
         <span className={isOpen ? 'text-white/80' : 'text-fog'}>{period}</span>
@@ -150,31 +149,28 @@ export default function Home() {
 
   const experiences = [
     {
-      role: "Senior Full Stack Developer",
-      company: "TechCorp Solutions",
-      location: "San Francisco, CA",
-      website: "https://techcorp.com",
-      period: "2021 - Present",
-      description: "Led development of enterprise-scale applications, mentored junior developers, and implemented microservices architecture. Improved system performance by 40% through optimization and modern architecture patterns.",
-      tech: ["React", "Node.js", "AWS", "MongoDB", "Docker", "Kubernetes"]
+      role: "byU Product Engineer @ Telkomsel",
+      location: "Jakarta, ID",
+      website: "https://www.byu.id",
+      period: "Jan. 2022 - Aug. 2024",
+      description: "Led development of a high-performance PoS and voucher system, enhanced service availability to 99.9% using Kong API Gateway with custom plugins, and transitioned architecture to microservices, accelerating development cycles by 40%. Boosted user engagement by 15% through A/B testing and drove IDR 550M+ in monthly revenue from new features.",
+      tech: ["Kong API Gateway", "Lua", "Microservices", "Firebase", "Redis"]
     },
     {
-      role: "Full Stack Developer",
-      company: "Innovation Labs",
-      location: "New York, NY",
-      website: "https://innovationlabs.tech",
-      period: "2019 - 2021",
-      description: "Developed and maintained multiple client projects, improved CI/CD pipelines, reduced deployment time by 40%. Led a team of 5 developers in creating a revolutionary fintech platform.",
-      tech: ["Vue.js", "Python", "Docker", "PostgreSQL", "AWS", "Jenkins"]
+      role: "Assoc. Software Engineer @ Tokopedia",
+      location: "Jakarta, ID",
+      website: "https://www.tokopedia.com",
+      period: "Apr. 2021 – Dec. 2021",
+      description: "Built a real-time AI feedback platform using Kafka and FAISS, achieving improved CTR by 3%. Streamlined deployment workflows and introduced zero-downtime strategies for enhanced reliability.",
+      tech: ["Kafka", "FAISS", "Systemd", "Python", "CI/CD"]
     },
     {
-      role: "Frontend Developer",
-      company: "Creative Digital",
-      location: "Austin, TX",
+      role: "Jr. Software Engineer @ Pinhome",
+      location: "Jakarta, ID",
       website: "https://creativedigital.io",
-      period: "2018 - 2019",
-      description: "Built responsive web applications, implemented design systems, and improved web performance metrics. Reduced load time by 60% through optimization techniques.",
-      tech: ["React", "TypeScript", "SASS", "Jest", "Webpack", "Redux"]
+      period: "Jul. 2020 – Apr. 2021",
+      description: "Automated iOS deployment with GitLab CI/CD and Fastlane, cutting release times by 70%. Reduced bugs by 60% with test coverage tooling and improved property search speed by optimizing Elasticsearch.",
+      tech: ["CI/CD", "Fastlane", "Flutter", "Elasticsearch", "Python"]
     }
   ];
 
@@ -185,14 +181,14 @@ export default function Home() {
         <div className="max-w-1100 mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="max-w-3xl">
             <h1 className="text-h1 font-bold text-ink mb-8 leading-tight tracking-tight">
-              Hi, I'm Farhun 👋
+              Hi, I'm Farhan 👋
               <br />
               <span className="text-rose">Full-Stack Developer</span>
               <br />
               and Problem Solver
             </h1>
             <p className="text-fog text-lg mb-12 leading-relaxed">
-              I craft elegant solutions to complex problems, specializing in building modern web applications with React, Node.js, and cloud technologies. Currently crafting digital experiences that make a difference.
+            I design scalable software architectures and build robust applications end-to-end — from database design to cloud deployment. With a strong focus on system design and project execution, I bring ideas to life with clean, reliable code.
             </p>
             <div className="flex items-center gap-6">
               <a
@@ -212,7 +208,7 @@ export default function Home() {
                 <Linkedin size={22} />
               </a>
               <a
-                href="mailto:farhun@example.com"
+                href="mailto:mfarhan0304@gmail.com"
                 className="p-4 bg-white rounded-full hover:bg-rose hover:text-white shadow-sm transition-all duration-300"
               >
                 <Mail size={22} />
@@ -260,7 +256,7 @@ export default function Home() {
             Whether you have a question or just want to say hi, feel free to reach out!
           </p>
           <a
-            href="mailto:farhun@example.com"
+            href="mailto:mfarhan0304@gmail.com"
             className="inline-flex items-center px-10 py-5 bg-rose text-white rounded-full hover:bg-rose/90 shadow-lg hover:shadow-xl transition-all duration-300 text-body font-semibold tracking-wide"
           >
             Get In Touch

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
-import Chatbot from './Chatbot';
 
 export default function Layout({ children }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,7 +13,7 @@ export default function Layout({ children }) {
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <NavLink to="/" className="text-h3 font-bold text-ink">
-                Farhun
+                Farhan
               </NavLink>
             </div>
 
@@ -116,18 +115,15 @@ export default function Layout({ children }) {
             <a href="https://linkedin.com" className="text-fog hover:text-ink transition-all">
               <Linkedin size={24} />
             </a>
-            <a href="mailto:farhun@example.com" className="text-fog hover:text-ink transition-all">
+            <a href="mailto:mfarhan0304@gmail.com" className="text-fog hover:text-ink transition-all">
               <Mail size={24} />
             </a>
           </div>
           <div className="mt-8 text-center text-fog">
-            <p>&copy; {new Date().getFullYear()} Farhun. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Farhan. All rights reserved.</p>
           </div>
         </div>
       </footer>
-
-      {/* Chatbot */}
-      <Chatbot />
     </div>
   );
 }
