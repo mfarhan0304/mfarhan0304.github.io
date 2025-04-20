@@ -167,7 +167,7 @@ export default function Home() {
     {
       role: "Jr. Software Engineer @ Pinhome",
       location: "Jakarta, ID",
-      website: "https://creativedigital.io",
+      website: "https://www.pinhome.id",
       period: "Jul. 2020 – Apr. 2021",
       description: "Automated iOS deployment with GitLab CI/CD and Fastlane, cutting release times by 70%. Reduced bugs by 60% with test coverage tooling and improved property search speed by optimizing Elasticsearch.",
       tech: ["CI/CD", "Fastlane", "Flutter", "Elasticsearch", "Python"]
