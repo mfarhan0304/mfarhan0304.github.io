@@ -5,7 +5,7 @@ import About from './pages/About';
 import Projects from './pages/Projects';
 import Resume from './pages/Resume';
 
-function App() {
+const App = (): JSX.Element => {
   return (
     <Router>
       <Layout>
@@ -18,6 +18,6 @@ function App() {
       </Layout>
     </Router>
   );
-}
+};
 
 export default App;
