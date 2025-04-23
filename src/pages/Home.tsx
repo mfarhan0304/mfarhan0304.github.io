@@ -23,34 +23,34 @@ const ProjectCard = ({ title, description, image, tech, links, size = 'md' }: Pr
         loading="lazy"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-100">
-        <div className="absolute bottom-0 left-0 right-0 p-8">
-          <h3 className="text-h3 font-semibold text-white mb-3 tracking-wide">{title}</h3>
-          <p className="text-gray-200 mb-6 leading-relaxed">{description}</p>
-          <div className="flex flex-wrap gap-2 mb-6">
+        <div className="absolute bottom-0 left-0 right-0 p-6">
+          <h3 className="text-2xl font-semibold text-white mb-2 tracking-wide">{title}</h3>
+          <p className="text-gray-200 mb-4 leading-relaxed text-sm max-w-[90%]">{description}</p>
+          <div className="flex flex-wrap gap-1.5 mb-4">
             {tech.map((item, index) => (
-              <span key={index} className="px-4 py-1.5 bg-white/10 text-white/90 rounded-full text-caption backdrop-blur-sm">
+              <span key={index} className="px-3 py-1 bg-white/10 text-white/90 rounded-full text-xs backdrop-blur-sm">
                 {item}
               </span>
             ))}
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-2">
             <a 
               href={links.live} 
-              className="p-2.5 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white hover:text-rose transition-all duration-300" 
+              className="p-2 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white hover:text-rose transition-all duration-300" 
               target="_blank" 
               rel="noopener noreferrer"
               aria-label={`Visit ${title} live site`}
             >
-              <ExternalLink size={20} className="text-white group-hover:text-rose" />
+              <ExternalLink size={18} className="text-white group-hover:text-rose" />
             </a>
             <a 
               href={links.github} 
-              className="p-2.5 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white hover:text-rose transition-all duration-300" 
+              className="p-2 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white hover:text-rose transition-all duration-300" 
               target="_blank" 
               rel="noopener noreferrer"
               aria-label={`View ${title} GitHub repository`}
             >
-              <Github size={20} className="text-white group-hover:text-rose" />
+              <Github size={18} className="text-white group-hover:text-rose" />
             </a>
           </div>
         </div>
@@ -80,44 +80,52 @@ const ExperienceAccordion = ({
   isOpen, 
   onToggle 
 }: ExperienceAccordionProps): JSX.Element => (
-  <div className="mb-6">
+  <div className="mb-4">
     <button
       onClick={onToggle}
-      className={`w-full p-8 rounded-xl flex items-center justify-between transition-all duration-300 ${
+      className={`w-full px-6 py-4 rounded-xl flex items-center justify-between transition-all duration-300 border ${
         isOpen 
-          ? 'bg-gradient-to-r from-rose to-rose/90 text-white shadow-lg' 
-          : 'bg-white hover:bg-rose/5 text-ink border border-blush/50'
+          ? 'bg-[#4169E1] text-white border-[#4169E1] shadow-md' 
+          : 'bg-white hover:bg-gray-50 border-gray-200 shadow-sm'
       }`}
       aria-expanded={isOpen}
       aria-controls={`experience-${role.toLowerCase().replace(/\s+/g, '-')}`}
     >
       <div className="text-left">
-        <h3 className="text-h4 font-semibold mb-1">{role}</h3>
-        <p className="text-caption text-fog">{period}</p>
+        <h3 className="text-xl font-semibold mb-0">{role}</h3>
       </div>
-      <ChevronDown 
-        size={24} 
-        className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} 
-      />
+      <div className="flex items-center gap-4">
+        <span className={`text-lg ${isOpen ? 'text-gray-200' : 'text-gray-400'}`}>{period}</span>
+        <ChevronDown 
+          size={20} 
+          className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} 
+        />
+      </div>
     </button>
     {isOpen && (
       <div 
         id={`experience-${role.toLowerCase().replace(/\s+/g, '-')}`}
-        className="mt-4 p-8 bg-white rounded-xl border border-blush/50"
+        className="mt-4 px-6 py-4 bg-white rounded-xl border border-gray-200 shadow-sm"
       >
-        <div className="flex items-center gap-2 text-fog mb-4">
-          <MapPin size={16} />
-          <span>{location}</span>
+        <div className="flex items-center gap-2 text-gray-500 mb-4">
+          <div className="flex items-center gap-2">
+            <MapPin size={16} />
+            <span>{location}</span>
+          </div>
           <span className="mx-2">•</span>
-          <LinkIcon size={16} />
-          <a href={website} target="_blank" rel="noopener noreferrer" className="hover:text-rose transition-colors">
-            {website}
-          </a>
+          <div className="flex items-center gap-2">
+            <LinkIcon size={16} />
+            <a href={website} target="_blank" rel="noopener noreferrer" className="hover:text-[#4169E1] transition-colors">
+              {website}
+            </a>
+          </div>
         </div>
-        <p className="text-gray-600 mb-4">{description}</p>
+        <p className="text-gray-600 mb-6 leading-relaxed">
+          {description}
+        </p>
         <div className="flex flex-wrap gap-2">
           {tech.map((item, index) => (
-            <span key={index} className="px-4 py-1.5 bg-rose/10 text-rose rounded-full text-caption">
+            <span key={index} className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm border border-gray-200">
               {item}
             </span>
           ))}
@@ -139,13 +147,22 @@ const Home = (): JSX.Element => {
       {/* Hero Section */}
       <section className="pt-32 pb-16">
         <div className="max-w-1100 mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-h1 font-bold text-ink mb-6 text-center">
-            Hi, I'm <span className="text-rose">Farhan</span>
-          </h1>
-          <p className="text-h4 text-fog mb-8 max-w-2xl mx-auto text-center">
-            A passionate full-stack developer creating beautiful and functional web applications.
-          </p>
-          <div className="flex gap-4 justify-center">
+          <div className="mb-8">
+            <h1 className="text-5xl md:text-6xl font-bold text-ink mb-4">
+              Hi, I'm Farhan 👋
+            </h1>
+            <div className="text-4xl md:text-5xl font-bold mb-8">
+              <span className="text-[#4169E1]">Full-Stack Developer</span>
+              <br />
+              <span className="text-ink">and Problem Solver</span>
+            </div>
+            <p className="text-xl text-gray-600 max-w-3xl">
+              I design scalable software architectures and build robust applications end-to-end — from 
+              database design to cloud deployment. With a strong focus on system design and project 
+              execution, I bring ideas to life with clean, reliable code.
+            </p>
+          </div>
+          <div className="flex gap-4">
             <a
               href="https://github.com/mfarhan0304"
               target="_blank"
@@ -216,7 +233,7 @@ const Home = (): JSX.Element => {
               description="Led development of a high-performance PoS and voucher system, enhanced service availability to 99.9% using Kong API Gateway with custom plugins, and transitioned architecture to microservices, accelerating development cycles by 40%. Boosted user engagement by 15% through A/B testing and drove IDR 550M+ in monthly revenue from new features."
               tech={['Kong API Gateway', 'Lua', 'Microservices', 'Firebase', 'Redis']}
               location="Jakarta, ID"
-              website="https://www.byu.id"
+              website="www.byu.id"
               isOpen={openExperience === 0}
               onToggle={() => toggleExperience(0)}
             />
@@ -226,7 +243,7 @@ const Home = (): JSX.Element => {
               description="Built a real-time AI feedback platform using Kafka and FAISS, achieving improved CTR by 3%. Streamlined deployment workflows and introduced zero-downtime strategies for enhanced reliability."
               tech={['Kafka', 'FAISS', 'Systemd', 'Python', 'CI/CD']}
               location="Jakarta, ID"
-              website="https://www.tokopedia.com"
+              website="www.tokopedia.com"
               isOpen={openExperience === 1}
               onToggle={() => toggleExperience(1)}
             />
@@ -236,7 +253,7 @@ const Home = (): JSX.Element => {
               description="Automated iOS deployment with GitLab CI/CD and Fastlane, cutting release times by 70%. Reduced bugs by 60% with test coverage tooling and improved property search speed by optimizing Elasticsearch."
               tech={['CI/CD', 'Fastlane', 'Flutter', 'Elasticsearch', 'Python']}
               location="Jakarta, ID"
-              website="https://www.pinhome.id"
+              website="www.pinhome.id"
               isOpen={openExperience === 2}
               onToggle={() => toggleExperience(2)}
             />
@@ -247,17 +264,19 @@ const Home = (): JSX.Element => {
       {/* Contact Section */}
       <section id="contact" className="py-16">
         <div className="max-w-1100 mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-h2 font-bold text-ink mb-12 text-center">Get in Touch</h2>
-          <div className="max-w-2xl mx-auto text-center">
-            <p className="text-h4 text-fog mb-8">
-              I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
+          <h2 className="text-h2 font-bold text-ink mb-12 text-center">Let's Work Together</h2>
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="text-fog text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
+              I'm always interested in hearing about new projects and opportunities.
+              <br />
+              Whether you have a question or just want to say hi, feel free to reach out!
             </p>
             <a
               href="mailto:mfarhan0304@gmail.com"
-              className="inline-flex items-center px-6 py-3 border border-transparent rounded-lg text-sm font-medium text-white bg-rose hover:bg-rose/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose"
+              className="inline-flex items-center px-8 py-4 text-lg font-medium text-white bg-[#4169E1] rounded-xl hover:bg-[#4169E1]/90 transition-colors duration-300"
               aria-label="Send email"
             >
-              <Mail size={20} className="mr-2" />
+              <Mail size={24} className="mr-3" />
               Let's Collaborate!
             </a>
           </div>
