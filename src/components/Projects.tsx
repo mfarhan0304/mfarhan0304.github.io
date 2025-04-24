@@ -6,10 +6,10 @@ const projects = [
     description: "AI-powered marketing platform that transforms campaigns with real-time sentiment analysis and adaptive personalization.",
     link: "https://pulse-of-personas.vercel.app/",
     images: [
-      "/projects/pulse/1.png",
-      "/projects/pulse/2.png",
-      "/projects/pulse/3.png",
-      "/projects/pulse/4.png"
+      "../projects/pulse/1.png",
+      "../projects/pulse/2.png",
+      "../projects/pulse/3.png",
+      "../projects/pulse/4.png"
     ]
   },
   {
@@ -17,10 +17,10 @@ const projects = [
     description: "Interactive cultural showcase featuring Javanese astrology and language games, bringing Indonesian heritage to life.",
     link: "https://nyu-indonesian-night.vercel.app/",
     images: [
-      "/projects/indonesian/1.png",
-      "/projects/indonesian/2.png",
-      "/projects/indonesian/3.png",
-      "/projects/indonesian/4.png"
+      "../projects/indonesian/1.png",
+      "../projects/indonesian/2.png",
+      "../projects/indonesian/3.png",
+      "../projects/indonesian/4.png"
     ]
   }
 ];

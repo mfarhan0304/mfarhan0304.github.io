@@ -1,6 +1,5 @@
-import { useState, ReactNode } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
+import { ReactNode } from 'react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 
 interface LayoutProps {
   children: ReactNode;
