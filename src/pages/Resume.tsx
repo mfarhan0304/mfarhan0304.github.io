@@ -6,7 +6,7 @@ const Resume = (): JSX.Element => {
     <div className="min-h-screen bg-cloud">
       <section className="pt-32 pb-16">
         <div className="max-w-1100 mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center mb-12">
+          <div className="flex justify-between items-center mb-6">
             <h1 className="text-h1 font-bold text-ink text-center">Farhan</h1>
             <a
               href="/resume.pdf"

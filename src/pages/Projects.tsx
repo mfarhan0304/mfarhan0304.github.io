@@ -90,7 +90,7 @@ const Projects = (): JSX.Element => {
     <div className="min-h-screen bg-cloud">
       <section className="pt-32 pb-16">
         <div className="max-w-1100 mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-h1 font-bold text-ink mb-12 text-center">My Work</h1>
+          <h1 className="text-h1 font-bold text-ink mb-6 text-center">My Work</h1>
           
           <div className="mb-8">
             <p className="text-h4 text-fog max-w-3xl mx-auto text-center">

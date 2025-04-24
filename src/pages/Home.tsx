@@ -13,7 +13,7 @@ const Home = (): JSX.Element => {
   return (
     <div className="min-h-screen bg-cloud">
       {/* Hero Section */}
-      <section className="pt-32 pb-16">
+      <section className="pt-16 pb-16 relative">
         <div className="max-w-1100 mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
             <h1 className="text-5xl md:text-6xl font-bold text-ink mb-4">
@@ -58,12 +58,17 @@ const Home = (): JSX.Element => {
             </a>
           </div>
         </div>
+        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-b from-transparent to-white/10" />
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-16">
+      <section id="projects" className="py-16 relative">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#4169E1]/20 to-transparent" />
         <div className="max-w-1100 mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-h2 font-bold text-ink mb-12 text-center">Featured Projects</h2>
+          <div className="text-center mb-6">
+            <h2 className="text-h2 font-bold text-ink">Featured Projects</h2>
+            <div className="w-24 h-1 bg-[#4169E1] mx-auto rounded-full" />
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <ProjectCard
               title="Pulse of Personas"
@@ -88,12 +93,17 @@ const Home = (): JSX.Element => {
             />
           </div>
         </div>
+        <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#4169E1]/20 to-transparent" />
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="py-16">
+      <section id="experience" className="py-16 relative bg-gradient-to-b from-white to-gray-50">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#4169E1]/20 to-transparent" />
         <div className="max-w-1100 mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-h2 font-bold text-ink mb-12 text-center">Professional Experience</h2>
+          <div className="text-center mb-6">
+            <h2 className="text-h2 font-bold text-ink">Professional Experience</h2>
+            <div className="w-24 h-1 bg-[#4169E1] mx-auto rounded-full" />
+          </div>
           <div>
             <ExperienceAccordion
               role="byU Product Engineer @ Telkomsel"
@@ -127,14 +137,19 @@ const Home = (): JSX.Element => {
             />
           </div>
         </div>
+        <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#4169E1]/20 to-transparent" />
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-16">
+      <section id="contact" className="py-16 relative">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#4169E1]/20 to-transparent" />
         <div className="max-w-1100 mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-h2 font-bold text-ink mb-12 text-center">Let's Work Together</h2>
+          <div className="text-center mb-6">
+            <h2 className="text-h2 font-bold text-ink">Let's Work Together</h2>
+            <div className="w-24 h-1 bg-[#4169E1] mx-auto rounded-full" />
+          </div>
           <div className="max-w-3xl mx-auto text-center">
-            <p className="text-fog text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-fog text-lg mb-6 max-w-2xl mx-auto leading-relaxed">
               I'm always interested in hearing about new projects and opportunities.
               <br />
               Whether you have a question or just want to say hi, feel free to reach out!
@@ -154,4 +169,4 @@ const Home = (): JSX.Element => {
   );
 };
 
-export default Home; 
+export default Home;
