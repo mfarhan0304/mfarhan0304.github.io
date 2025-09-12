@@ -13,29 +13,29 @@ const Home = (): JSX.Element => {
   return (
     <div className="min-h-screen bg-cloud">
       {/* Hero Section */}
-      <section className="pt-16 pb-16 relative">
-        <div className="max-w-1100 mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-8">
-            <h1 className="text-5xl md:text-6xl font-bold text-ink mb-4">
-              Hi, I'm Farhan 👋
+      <section className="pt-20 pb-24 relative">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h1 className="text-6xl md:text-7xl font-bold text-ink mb-6 leading-tight">
+              Hi, I'm Farhan
             </h1>
-            <div className="text-4xl md:text-5xl font-bold mb-8">
-              <span className="text-[#4169E1]">Full-Stack Developer</span>
-              <br />
-              <span className="text-ink">and Problem Solver</span>
+            <div className="text-3xl md:text-4xl font-medium mb-8 text-fog">
+              <span className="text-sage">Full-Stack Developer</span>
+              <span className="text-mist mx-2">•</span>
+              <span className="text-ink">Problem Solver</span>
             </div>
-            <p className="text-xl text-gray-600 max-w-3xl">
+            <p className="text-xl text-mist max-w-4xl mx-auto leading-relaxed">
               I design scalable software architectures and build robust applications end-to-end — from 
               database design to cloud deployment. With a strong focus on system design and project 
               execution, I bring ideas to life with clean, reliable code.
             </p>
           </div>
-          <div className="flex gap-4">
+          <div className="flex justify-center gap-6">
             <a
               href="https://github.com/mfarhan0304"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white hover:text-rose transition-all duration-300"
+              className="p-3 bg-charcoal text-cream rounded-lg hover:bg-sage hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl"
               aria-label="GitHub"
             >
               <Github size={24} />
@@ -44,32 +44,30 @@ const Home = (): JSX.Element => {
               href="https://linkedin.com/in/mfarhan0304"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white hover:text-rose transition-all duration-300"
+              className="p-3 bg-charcoal text-cream rounded-lg hover:bg-sage hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl"
               aria-label="LinkedIn"
             >
               <Linkedin size={24} />
             </a>
             <a
               href="mailto:mfarhan0304@gmail.com"
-              className="p-2.5 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white hover:text-rose transition-all duration-300"
+              className="p-3 bg-charcoal text-cream rounded-lg hover:bg-sage hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl"
               aria-label="Email"
             >
               <Mail size={24} />
             </a>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-b from-transparent to-white/10" />
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-16 relative">
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#4169E1]/20 to-transparent" />
-        <div className="max-w-1100 mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-6">
-            <h2 className="text-h2 font-bold text-ink">Featured Projects</h2>
-            <div className="w-24 h-1 bg-[#4169E1] mx-auto rounded-full" />
+      <section id="projects" className="py-20 relative bg-blush">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-ink mb-4">Featured Projects</h2>
+            <div className="w-20 h-1 bg-sage mx-auto rounded-full" />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <ProjectCard
               title="Pulse of Personas"
               description="AI-powered marketing platform that transforms campaigns with real-time sentiment analysis and adaptive personalization."
@@ -93,16 +91,14 @@ const Home = (): JSX.Element => {
             />
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#4169E1]/20 to-transparent" />
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="py-16 relative bg-gradient-to-b from-white to-gray-50">
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#4169E1]/20 to-transparent" />
-        <div className="max-w-1100 mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-6">
-            <h2 className="text-h2 font-bold text-ink">Professional Experience</h2>
-            <div className="w-24 h-1 bg-[#4169E1] mx-auto rounded-full" />
+      <section id="experience" className="py-20 relative bg-cloud">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-ink mb-4">Professional Experience</h2>
+            <div className="w-20 h-1 bg-sage mx-auto rounded-full" />
           </div>
           <div>
             <ExperienceAccordion
@@ -141,22 +137,21 @@ const Home = (): JSX.Element => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-16 relative">
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#4169E1]/20 to-transparent" />
-        <div className="max-w-1100 mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-6">
-            <h2 className="text-h2 font-bold text-ink">Let's Work Together</h2>
-            <div className="w-24 h-1 bg-[#4169E1] mx-auto rounded-full" />
+      <section id="contact" className="py-20 relative bg-charcoal">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-cream mb-4">Let's Work Together</h2>
+            <div className="w-20 h-1 bg-sage mx-auto rounded-full" />
           </div>
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="text-fog text-lg mb-6 max-w-2xl mx-auto leading-relaxed">
+          <div className="max-w-4xl mx-auto text-center">
+            <p className="text-taupe text-xl mb-8 max-w-3xl mx-auto leading-relaxed">
               I'm always interested in hearing about new projects and opportunities.
               <br />
               Whether you have a question or just want to say hi, feel free to reach out!
             </p>
             <a
               href="mailto:mfarhan0304@gmail.com"
-              className="inline-flex items-center px-8 py-4 text-lg font-medium text-white bg-[#4169E1] rounded-xl hover:bg-[#4169E1]/90 transition-colors duration-300"
+              className="inline-flex items-center px-10 py-5 text-lg font-medium text-charcoal bg-sage rounded-xl hover:bg-olive hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl"
               aria-label="Send email"
             >
               <Mail size={24} className="mr-3" />

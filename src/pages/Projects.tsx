@@ -15,43 +15,43 @@ interface ProjectCardProps {
 
 const ProjectCard = ({ title, description, image, tech, links, category }: ProjectCardProps): JSX.Element => (
   <div className="relative group">
-    <div className="relative h-[400px] rounded-xl overflow-hidden shadow-lg transition-transform duration-500">
+    <div className="relative h-[450px] rounded-2xl overflow-hidden shadow-xl transition-all duration-500 hover:shadow-2xl bg-white">
       <img 
         src={image} 
         alt={title} 
         className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105" 
         loading="lazy"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-100">
+      <div className="absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/60 to-transparent opacity-100">
         <div className="absolute bottom-0 left-0 right-0 p-8">
-          <span className="text-caption text-white/80 mb-2 block">{category}</span>
-          <h3 className="text-h3 font-semibold text-white mb-3 tracking-wide">{title}</h3>
-          <p className="text-gray-200 mb-6 leading-relaxed">{description}</p>
+          <span className="text-sm text-taupe mb-3 block font-medium">{category}</span>
+          <h3 className="text-2xl font-bold text-cream mb-3 tracking-wide">{title}</h3>
+          <p className="text-taupe mb-6 leading-relaxed">{description}</p>
           <div className="flex flex-wrap gap-2 mb-6">
             {tech.map((item, index) => (
-              <span key={index} className="px-4 py-1.5 bg-white/10 text-white/90 rounded-full text-caption backdrop-blur-sm">
+              <span key={index} className="px-3 py-1 bg-sage/20 text-sage rounded-full text-xs backdrop-blur-sm border border-sage/30">
                 {item}
               </span>
             ))}
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-3">
             <a 
               href={links.live} 
-              className="p-2.5 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white hover:text-rose transition-all duration-300" 
+              className="p-2.5 bg-sage/20 backdrop-blur-sm rounded-lg hover:bg-sage hover:text-white transition-all duration-300 border border-sage/30" 
               target="_blank" 
               rel="noopener noreferrer"
               aria-label={`Visit ${title} live site`}
             >
-              <ExternalLink size={20} className="text-white group-hover:text-rose" />
+              <ExternalLink size={16} className="text-sage group-hover:text-white" />
             </a>
             <a 
               href={links.github} 
-              className="p-2.5 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white hover:text-rose transition-all duration-300" 
+              className="p-2.5 bg-sage/20 backdrop-blur-sm rounded-lg hover:bg-sage hover:text-white transition-all duration-300 border border-sage/30" 
               target="_blank" 
               rel="noopener noreferrer"
               aria-label={`View ${title} GitHub repository`}
             >
-              <Github size={20} className="text-white group-hover:text-rose" />
+              <Github size={16} className="text-sage group-hover:text-white" />
             </a>
           </div>
         </div>
@@ -88,18 +88,21 @@ const Projects = (): JSX.Element => {
 
   return (
     <div className="min-h-screen bg-cloud">
-      <section className="pt-32 pb-16">
-        <div className="max-w-1100 mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-h1 font-bold text-ink mb-6 text-center">My Work</h1>
+      <section className="pt-20 pb-24">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h1 className="text-4xl md:text-5xl font-bold text-ink mb-4">My Work</h1>
+            <div className="w-20 h-1 bg-sage mx-auto rounded-full" />
+          </div>
           
-          <div className="mb-8">
-            <p className="text-h4 text-fog max-w-3xl mx-auto text-center">
+          <div className="mb-12">
+            <p className="text-xl text-mist max-w-4xl mx-auto text-center leading-relaxed">
               Deployed scalable web applications and microservices, focusing on high performance and user experience.
               Collaborated in multiple projects with various clients across different industries.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {projects.map((project, index) => (
               <ProjectCard key={index} {...project} />
             ))}
