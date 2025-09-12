@@ -1,4 +1,4 @@
-import { JSX } from 'react';
+import { JSX, useState, useMemo } from 'react';
 import { ExternalLink, Github } from 'lucide-react';
 
 interface ProjectCardProps {
@@ -10,10 +10,10 @@ interface ProjectCardProps {
     live: string;
     github: string;
   };
-  category: string;
+  categories: string[];
 }
 
-const ProjectCard = ({ title, description, image, tech, links, category }: ProjectCardProps): JSX.Element => (
+const ProjectCard = ({ title, description, image, tech, links, categories }: ProjectCardProps): JSX.Element => (
   <div className="relative group">
     <div className="relative h-[450px] rounded-2xl overflow-hidden shadow-xl transition-all duration-500 hover:shadow-2xl bg-white">
       <img 
@@ -24,12 +24,12 @@ const ProjectCard = ({ title, description, image, tech, links, category }: Proje
       />
       <div className="absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/60 to-transparent opacity-100">
         <div className="absolute bottom-0 left-0 right-0 p-8">
-          <span className="text-sm text-taupe mb-3 block font-medium">{category}</span>
+          <span className="text-sm text-taupe mb-3 block font-medium">{categories.join(", ")}</span>
           <h3 className="text-2xl font-bold text-cream mb-3 tracking-wide">{title}</h3>
           <p className="text-taupe mb-6 leading-relaxed">{description}</p>
           <div className="flex flex-wrap gap-2 mb-6">
             {tech.map((item, index) => (
-              <span key={index} className="px-3 py-1 bg-sage/20 text-sage rounded-full text-xs backdrop-blur-sm border border-sage/30">
+              <span key={index} className="px-3 py-1.5 bg-sage/40 text-cream rounded-full text-sm font-medium backdrop-blur-sm border border-sage/50 shadow-lg">
                 {item}
               </span>
             ))}
@@ -37,21 +37,23 @@ const ProjectCard = ({ title, description, image, tech, links, category }: Proje
           <div className="flex gap-3">
             <a 
               href={links.live} 
-              className="p-2.5 bg-sage/20 backdrop-blur-sm rounded-lg hover:bg-sage hover:text-white transition-all duration-300 border border-sage/30" 
+              className="flex items-center gap-2 px-4 py-2.5 bg-sage/40 backdrop-blur-sm rounded-lg hover:bg-sage hover:text-white transition-all duration-300 border border-sage/50 shadow-lg group/link" 
               target="_blank" 
               rel="noopener noreferrer"
               aria-label={`Visit ${title} live site`}
             >
-              <ExternalLink size={16} className="text-sage group-hover:text-white" />
+              <ExternalLink size={16} className="text-cream group-hover/link:text-white" />
+              <span className="text-sm font-medium text-cream group-hover/link:text-white">Live Demo</span>
             </a>
             <a 
               href={links.github} 
-              className="p-2.5 bg-sage/20 backdrop-blur-sm rounded-lg hover:bg-sage hover:text-white transition-all duration-300 border border-sage/30" 
+              className="flex items-center gap-2 px-4 py-2.5 bg-sage/40 backdrop-blur-sm rounded-lg hover:bg-sage hover:text-white transition-all duration-300 border border-sage/50 shadow-lg group/link" 
               target="_blank" 
               rel="noopener noreferrer"
               aria-label={`View ${title} GitHub repository`}
             >
-              <Github size={16} className="text-sage group-hover:text-white" />
+              <Github size={16} className="text-cream group-hover/link:text-white" />
+              <span className="text-sm font-medium text-cream group-hover/link:text-white">GitHub</span>
             </a>
           </div>
         </div>
@@ -63,6 +65,17 @@ const ProjectCard = ({ title, description, image, tech, links, category }: Proje
 const Projects = (): JSX.Element => {
   const projects = [
     {
+      title: "Emojify",
+      description: "AI-powered marketing platform that transforms campaigns with real-time sentiment analysis and adaptive personalization.",
+      image: "/projects/emojify/1.png",
+      tech: ["Supabase", "TypeScript", "Node.js", "PostgreSQL", "Real-time Channels", "Gemini API"],
+      links: {
+        live: "https://emojify-alpha.vercel.app/",
+        github: "https://github.com/mfarhan0304/emojify"
+      },
+      categories: ["Web Development", "LLM Integration"]
+    },
+    {
       title: "Pulse of Personas",
       description: "AI-powered marketing platform that transforms campaigns with real-time sentiment analysis and adaptive personalization.",
       image: "/projects/pulse/1.png",
@@ -71,7 +84,7 @@ const Projects = (): JSX.Element => {
         live: "https://pulse-of-personas.vercel.app/",
         github: "https://github.com/mfarhan0304/pulse-of-personas"
       },
-      category: "Web Development"
+      categories: ["Web Development", "LLM Integration"]
     },
     {
       title: "NYU Indonesian Night",
@@ -82,9 +95,31 @@ const Projects = (): JSX.Element => {
         live: "https://nyu-indonesian-night.vercel.app/",
         github: "https://github.com/mfarhan0304/nyu-indonesian-night"
       },
-      category: "Web Development"
+      categories: ["Web Development"]
     }
   ];
+
+  // Get unique categories from all projects
+  const allCategories = useMemo(() => {
+    const categories = new Set<string>();
+    projects.forEach(project => {
+      project.categories.forEach(category => categories.add(category));
+    });
+    return Array.from(categories).sort();
+  }, [projects]);
+
+  // Filter state
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+
+  // Filter projects based on selected category
+  const filteredProjects = useMemo(() => {
+    if (selectedCategory === 'All') {
+      return projects;
+    }
+    return projects.filter(project => 
+      project.categories.includes(selectedCategory)
+    );
+  }, [projects, selectedCategory]);
 
   return (
     <div className="min-h-screen bg-cloud">
@@ -102,11 +137,57 @@ const Projects = (): JSX.Element => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {projects.map((project, index) => (
-              <ProjectCard key={index} {...project} />
-            ))}
+          {/* Filter Buttons */}
+          <div className="mb-12">
+            <div className="flex flex-wrap justify-center gap-3">
+              <button
+                onClick={() => setSelectedCategory('All')}
+                className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                  selectedCategory === 'All'
+                    ? 'bg-sage text-white shadow-lg'
+                    : 'bg-white text-ink border-2 border-sage/30 hover:border-sage hover:bg-sage/10'
+                }`}
+              >
+                All ({projects.length})
+              </button>
+              {allCategories.map((category) => {
+                const count = projects.filter(project => 
+                  project.categories.includes(category)
+                ).length;
+                return (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                      selectedCategory === category
+                        ? 'bg-sage text-white shadow-lg'
+                        : 'bg-white text-ink border-2 border-sage/30 hover:border-sage hover:bg-sage/10'
+                    }`}
+                  >
+                    {category} ({count})
+                  </button>
+                );
+              })}
+            </div>
           </div>
+
+          {filteredProjects.length > 0 ? (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              {filteredProjects.map((project, index) => (
+                <ProjectCard key={index} {...project} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-16">
+              <p className="text-xl text-mist mb-4">No projects found in this category.</p>
+              <button
+                onClick={() => setSelectedCategory('All')}
+                className="px-6 py-2.5 bg-sage text-white rounded-full text-sm font-medium hover:bg-sage/90 transition-all duration-300"
+              >
+                Show All Projects
+              </button>
+            </div>
+          )}
         </div>
       </section>
     </div>
