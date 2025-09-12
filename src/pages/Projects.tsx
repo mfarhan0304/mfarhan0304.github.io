@@ -66,7 +66,7 @@ const Projects = (): JSX.Element => {
   const projects = [
     {
       title: "Emojify",
-      description: "AI-powered marketing platform that transforms campaigns with real-time sentiment analysis and adaptive personalization.",
+      description: "Transform your photo into an emoji with AI and have real time feed to share your cute emoji.",
       image: "/projects/emojify/1.png",
       tech: ["Supabase", "TypeScript", "Node.js", "PostgreSQL", "Real-time Channels", "Gemini API"],
       links: {
