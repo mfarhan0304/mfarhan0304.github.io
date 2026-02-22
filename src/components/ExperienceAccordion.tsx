@@ -11,62 +11,67 @@ interface ExperienceAccordionProps {
   onToggle: () => void;
 }
 
-const ExperienceAccordion = ({ 
-  role, 
-  period, 
-  description, 
-  tech, 
-  location, 
-  website, 
-  isOpen, 
-  onToggle 
+const ExperienceAccordion = ({
+  role,
+  period,
+  description,
+  tech,
+  location,
+  website,
+  isOpen,
+  onToggle
 }: ExperienceAccordionProps): JSX.Element => (
-  <div className="mb-6">
+  <div className="mb-4">
     <button
       onClick={onToggle}
-      className={`w-full px-8 py-6 rounded-2xl flex items-center justify-between transition-all duration-300 border-2 ${
-        isOpen 
-          ? 'bg-sage text-cream border-sage shadow-lg' 
-          : 'bg-white hover:bg-blush border-taupe/30 shadow-md hover:shadow-lg'
+      className={`w-full px-6 sm:px-8 py-5 rounded-xl flex items-center justify-between transition-all duration-300 border ${
+        isOpen
+          ? 'bg-slate-mid border-teal/40 shadow-lg'
+          : 'bg-slate-mid/60 hover:bg-slate-mid border-slate-light/20 hover:border-slate-light/40'
       }`}
       aria-expanded={isOpen}
       aria-controls={`experience-${role.toLowerCase().replace(/\s+/g, '-')}`}
     >
       <div className="text-left">
-        <h3 className="text-xl font-bold mb-0">{role}</h3>
+        <h3 className={`text-lg font-bold ${isOpen ? 'text-teal' : 'text-white'}`}>{role}</h3>
       </div>
-      <div className="flex items-center gap-6">
-        <span className={`text-lg font-medium ${isOpen ? 'text-cream' : 'text-mist'}`}>{period}</span>
-        <ChevronDown 
-          size={24} 
-          className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} 
+      <div className="flex items-center gap-4 shrink-0">
+        <span className={`text-sm font-medium hidden sm:inline ${isOpen ? 'text-gray-300' : 'text-gray-500'}`}>{period}</span>
+        <ChevronDown
+          size={20}
+          className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180 text-teal' : 'text-gray-500'}`}
         />
       </div>
     </button>
     {isOpen && (
-      <div 
+      <div
         id={`experience-${role.toLowerCase().replace(/\s+/g, '-')}`}
-        className="mt-6 px-8 py-6 bg-white rounded-2xl border-2 border-taupe/30 shadow-lg"
+        className="mt-2 px-6 sm:px-8 py-6 bg-slate-mid rounded-xl border border-slate-light/20"
       >
-        <div className="flex items-center gap-2 text-mist mb-6">
-          <div className="flex items-center gap-2">
-            <MapPin size={18} />
-            <span className="font-medium">{location}</span>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-gray-500 mb-5 text-sm">
+          <span className="text-gray-300 sm:hidden">{period}</span>
+          <div className="flex items-center gap-1.5">
+            <MapPin size={16} />
+            <span>{location}</span>
           </div>
-          <span className="mx-3">•</span>
-          <div className="flex items-center gap-2">
-            <LinkIcon size={18} />
-            <a href={website} target="_blank" rel="noopener noreferrer" className="hover:text-sage transition-colors font-medium">
-              {website}
-            </a>
-          </div>
+          {website && (
+            <>
+              <span>&bull;</span>
+              <div className="flex items-center gap-1.5">
+                <LinkIcon size={16} />
+                <a href={`https://${website}`} target="_blank" rel="noopener noreferrer" className="hover:text-teal transition-colors">
+                  {website}
+                </a>
+              </div>
+            </>
+          )}
         </div>
-        <p className="text-mist mb-6 leading-relaxed text-lg">
+        <p className="text-gray-300 mb-5 leading-relaxed">
           {description}
         </p>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-2">
           {tech.map((item, index) => (
-            <span key={index} className="px-4 py-2 bg-sage/10 text-sage rounded-full text-sm font-medium border border-sage/20">
+            <span key={index} className="px-3 py-1.5 bg-teal/10 text-teal rounded-full text-xs font-medium border border-teal/20">
               {item}
             </span>
           ))}
@@ -76,4 +81,4 @@ const ExperienceAccordion = ({
   </div>
 );
 
-export default ExperienceAccordion; 
+export default ExperienceAccordion;

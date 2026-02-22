@@ -12,6 +12,8 @@
 
   body {
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    background-color: #0F172A;
+    color: #F8FAFC;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -30,30 +32,27 @@
 }
 
 @layer components {
-  /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #F5F5DC;
+    background: #0F172A;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #6B7C32;
+    background: #334155;
     border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #2D5016;
+    background: #06B6D4;
   }
 
-  /* Smooth transitions */
   .transition-all {
     transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Hover effects */
   .hover-scale {
     transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -62,22 +61,23 @@
     transform: scale(1.02);
   }
 
-  /* Button styles */
   .btn-primary {
-    @apply bg-sage text-charcoal px-6 py-3 rounded-lg font-medium hover:bg-olive hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl;
+    @apply bg-teal text-slate-dark px-6 py-3 rounded-lg font-medium hover:bg-teal-light transition-all duration-300 shadow-lg hover:shadow-xl;
   }
 
   .btn-secondary {
-    @apply bg-charcoal text-cream px-6 py-3 rounded-lg font-medium hover:bg-sage hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl;
+    @apply bg-slate-mid text-white px-6 py-3 rounded-lg font-medium border border-slate-light hover:border-teal hover:text-teal transition-all duration-300;
   }
 
-  /* Card styles */
   .card {
-    @apply bg-white rounded-2xl shadow-lg border border-taupe/20 hover:shadow-xl transition-all duration-300;
+    @apply bg-slate-mid rounded-2xl shadow-lg border border-slate-light/30 hover:shadow-xl hover:border-teal/30 transition-all duration-300;
   }
 
-  /* Gradient backgrounds */
   .gradient-text {
-    @apply bg-gradient-to-r from-sage to-olive bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-teal to-teal-light bg-clip-text text-transparent;
+  }
+
+  .glow-teal {
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.15), 0 0 40px rgba(6, 182, 212, 0.05);
   }
 }
