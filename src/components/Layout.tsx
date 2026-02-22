@@ -1,5 +1,6 @@
 import { ReactNode, useState, useEffect, useRef } from 'react';
 import { Github, Linkedin, Mail, Menu, X } from 'lucide-react';
+import RunningTrail from './RunningTrail';
 
 interface LayoutProps {
   children: ReactNode;
@@ -98,6 +99,9 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
       {/* Cursor Spotlight */}
       {hasCursor && <div className="cursor-spotlight" />}
 
+      {/* Running Trail — continuous vertical element */}
+      <RunningTrail />
+
       {/* Sticky Navbar */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled ? 'bg-slate-dark/90 backdrop-blur-md border-b border-slate-light/20 shadow-lg' : 'bg-transparent'
@@ -164,42 +168,6 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
 
       {/* Main Content */}
       <main className="relative z-[2]">{children}</main>
-
-      {/* Footer */}
-      <footer className="relative z-[2] bg-slate-mid border-t border-slate-light/20">
-        <div className="max-w-6xl mx-auto px-4 py-12">
-          <div className="flex justify-center space-x-8">
-            <a
-              href="https://github.com/mfarhan0304"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-500 hover:text-teal transition-all duration-300 p-2"
-              aria-label="GitHub"
-            >
-              <Github size={24} />
-            </a>
-            <a
-              href="https://linkedin.com/in/mfarhan0304"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-500 hover:text-teal transition-all duration-300 p-2"
-              aria-label="LinkedIn"
-            >
-              <Linkedin size={24} />
-            </a>
-            <a
-              href="mailto:mfarhan0304@gmail.com"
-              className="text-gray-500 hover:text-teal transition-all duration-300 p-2"
-              aria-label="Email"
-            >
-              <Mail size={24} />
-            </a>
-          </div>
-          <div className="text-center mt-6">
-            <p className="text-gray-500 text-sm">&copy; 2026 Farhan. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };

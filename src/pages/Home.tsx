@@ -240,7 +240,6 @@ const Home = (): JSX.Element => {
               {[
                 { Icon: Trophy, label: 'Marathon Runner' },
                 { Icon: Mountain, label: 'Hiker' },
-                { Icon: Waves, label: 'Freediver' },
                 { Icon: Plane, label: 'Explorer' },
               ].map(({ Icon, label }, i) => (
                 <div key={label} className="bg-slate-mid rounded-xl p-5 border border-slate-light/20 text-center group hover:border-teal/30 transition-all scroll-reveal" style={{ transitionDelay: `${0.3 + i * 0.1}s` }}>
@@ -351,8 +350,7 @@ const Home = (): JSX.Element => {
       {/* ============================================
           EDUCATION SECTION
           ============================================ */}
-      <section id="education" className="py-20 md:py-28 bg-slate-dark relative" ref={educationRef}>
-        <SectionMountainAccent position="top" variant="subtle" />
+      <section id="education" className="py-20 md:py-28 bg-slate-dark" ref={educationRef}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-16 scroll-reveal">
             <span className="section-label mb-3 block">04 / Education</span>
@@ -404,8 +402,7 @@ const Home = (): JSX.Element => {
       {/* ============================================
           CONTACT SECTION
           ============================================ */}
-      <section id="contact" className="py-20 md:py-28 bg-slate-mid/50 relative" ref={contactRef}>
-        <SectionMountainAccent position="top" variant="subtle" />
+      <section id="contact" className="py-20 md:py-28 bg-slate-mid/50" ref={contactRef}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-16 scroll-reveal">
             <span className="section-label mb-3 block">05 / Contact</span>

@@ -22,18 +22,16 @@ const SectionMountainAccent = ({ position = 'bottom', variant = 'subtle' }: Sect
         preserveAspectRatio="none"
         style={{ opacity }}
       >
-        {/* Distant ridge */}
         <path
           d="M 0,80 L 120,50 L 240,65 L 360,35 L 480,55 L 600,25 L 720,45 L 840,30 L 960,50 L 1080,20 L 1200,40 L 1320,30 L 1440,45 L 1440,120 L 0,120 Z"
-          fill="rgba(15, 23, 42, 0.5)"
-          stroke="rgba(6, 182, 212, 0.06)"
+          fill="rgba(26, 26, 26, 0.5)"
+          stroke="rgba(74, 124, 89, 0.05)"
           strokeWidth="0.5"
         />
-        {/* Closer ridge */}
         <path
           d="M 0,100 L 180,75 L 360,90 L 540,70 L 720,85 L 900,65 L 1080,80 L 1260,70 L 1440,85 L 1440,120 L 0,120 Z"
-          fill="rgba(15, 23, 42, 0.8)"
-          stroke="rgba(6, 182, 212, 0.04)"
+          fill="rgba(26, 26, 26, 0.8)"
+          stroke="rgba(74, 124, 89, 0.03)"
           strokeWidth="0.5"
         />
       </svg>

@@ -7,16 +7,13 @@ const TopographicBackground = (): JSX.Element => {
         preserveAspectRatio="xMidYMax slice"
       >
         <defs>
-          {/* Gradient for sky glow */}
           <radialGradient id="skyGlow" cx="70%" cy="20%" r="50%">
-            <stop offset="0%" stopColor="rgba(6, 182, 212, 0.08)" />
+            <stop offset="0%" stopColor="rgba(74, 124, 89, 0.06)" />
             <stop offset="100%" stopColor="transparent" />
           </radialGradient>
-
-          {/* Moon glow */}
           <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="rgba(6, 182, 212, 0.15)" />
-            <stop offset="60%" stopColor="rgba(6, 182, 212, 0.05)" />
+            <stop offset="0%" stopColor="rgba(196, 187, 176, 0.12)" />
+            <stop offset="60%" stopColor="rgba(196, 187, 176, 0.04)" />
             <stop offset="100%" stopColor="transparent" />
           </radialGradient>
         </defs>
@@ -24,7 +21,7 @@ const TopographicBackground = (): JSX.Element => {
         {/* Sky glow */}
         <rect width="1440" height="900" fill="url(#skyGlow)" />
 
-        {/* Stars — tiny dots that twinkle */}
+        {/* Stars */}
         {[
           { cx: 120, cy: 80, r: 1.2, delay: '0s' },
           { cx: 340, cy: 120, r: 0.8, delay: '1.5s' },
@@ -46,7 +43,7 @@ const TopographicBackground = (): JSX.Element => {
             cx={star.cx}
             cy={star.cy}
             r={star.r}
-            fill="#F8FAFC"
+            fill="#F2EDE4"
             className="star-twinkle"
             style={{ animationDelay: star.delay }}
           />
@@ -54,55 +51,55 @@ const TopographicBackground = (): JSX.Element => {
 
         {/* Moon */}
         <circle cx="1100" cy="150" r="60" fill="url(#moonGlow)" />
-        <circle cx="1100" cy="150" r="8" fill="rgba(248, 250, 252, 0.12)" />
+        <circle cx="1100" cy="150" r="8" fill="rgba(242, 237, 228, 0.1)" />
 
-        {/* Mountain Layer 1 — furthest back, tallest peaks */}
+        {/* Mountain Layer 1 — furthest back */}
         <path
           d="M 0,650 L 80,520 L 160,580 L 280,420 L 360,480 L 440,350 L 520,400 L 620,310 L 720,380 L 800,280 L 880,350 L 960,290 L 1060,370 L 1140,320 L 1220,400 L 1300,340 L 1380,420 L 1440,380 L 1440,900 L 0,900 Z"
-          fill="rgba(15, 23, 42, 0.3)"
-          stroke="rgba(6, 182, 212, 0.06)"
+          fill="rgba(26, 26, 26, 0.3)"
+          stroke="rgba(74, 124, 89, 0.05)"
           strokeWidth="1"
         />
 
-        {/* Mountain Layer 2 — mid range */}
+        {/* Mountain Layer 2 */}
         <path
           d="M 0,700 L 100,600 L 200,650 L 320,530 L 420,580 L 500,470 L 580,530 L 680,450 L 780,520 L 860,430 L 940,500 L 1040,440 L 1120,510 L 1200,460 L 1300,530 L 1380,490 L 1440,540 L 1440,900 L 0,900 Z"
-          fill="rgba(15, 23, 42, 0.5)"
-          stroke="rgba(6, 182, 212, 0.08)"
+          fill="rgba(26, 26, 26, 0.5)"
+          stroke="rgba(74, 124, 89, 0.07)"
           strokeWidth="0.8"
           className="mountain-layer"
           style={{ animationDelay: '0s' }}
         />
 
-        {/* Mountain Layer 3 — closer, darker */}
+        {/* Mountain Layer 3 */}
         <path
           d="M 0,780 L 120,680 L 240,720 L 340,640 L 460,690 L 560,600 L 660,660 L 740,580 L 840,640 L 960,570 L 1060,630 L 1160,590 L 1260,650 L 1340,610 L 1440,660 L 1440,900 L 0,900 Z"
-          fill="rgba(15, 23, 42, 0.7)"
-          stroke="rgba(6, 182, 212, 0.1)"
+          fill="rgba(26, 26, 26, 0.7)"
+          stroke="rgba(74, 124, 89, 0.09)"
           strokeWidth="0.6"
           className="mountain-layer"
           style={{ animationDelay: '2s' }}
         />
 
-        {/* Foreground hills — darkest */}
+        {/* Foreground hills */}
         <path
           d="M 0,850 L 160,780 L 320,810 L 480,760 L 640,790 L 800,740 L 960,780 L 1120,750 L 1280,790 L 1440,760 L 1440,900 L 0,900 Z"
-          fill="rgba(15, 23, 42, 0.9)"
-          stroke="rgba(6, 182, 212, 0.05)"
+          fill="rgba(26, 26, 26, 0.9)"
+          stroke="rgba(74, 124, 89, 0.04)"
           strokeWidth="0.5"
         />
 
-        {/* Trail path — a winding dotted line across the mountains */}
+        {/* Trail path */}
         <path
           d="M -20,820 C 100,790 200,750 320,770 C 440,790 500,720 620,700 C 740,680 800,640 900,650 C 1000,660 1080,600 1200,580 C 1320,560 1400,530 1460,510"
           fill="none"
-          stroke="rgba(6, 182, 212, 0.15)"
+          stroke="rgba(74, 124, 89, 0.15)"
           strokeWidth="1.5"
           className="trail-path"
           strokeLinecap="round"
         />
 
-        {/* Small trees on the foreground hills */}
+        {/* Trees */}
         {[
           { x: 80, y: 830, s: 0.7 },
           { x: 140, y: 800, s: 0.5 },
@@ -119,29 +116,27 @@ const TopographicBackground = (): JSX.Element => {
           { x: 1350, y: 770, s: 0.7 },
         ].map((tree, i) => (
           <g key={i} transform={`translate(${tree.x}, ${tree.y}) scale(${tree.s})`} className="tree-sway" style={{ animationDelay: `${i * 0.4}s`, transformOrigin: `${tree.x}px ${tree.y}px` }}>
-            {/* Simple triangular pine tree */}
-            <line x1="0" y1="0" x2="0" y2="-20" stroke="rgba(6, 182, 212, 0.08)" strokeWidth="1" />
-            <polygon points="-6,-8 6,-8 0,-28" fill="rgba(6, 182, 212, 0.06)" />
-            <polygon points="-5,-14 5,-14 0,-30" fill="rgba(6, 182, 212, 0.05)" />
+            <line x1="0" y1="0" x2="0" y2="-20" stroke="rgba(74, 124, 89, 0.08)" strokeWidth="1" />
+            <polygon points="-6,-8 6,-8 0,-28" fill="rgba(74, 124, 89, 0.06)" />
+            <polygon points="-5,-14 5,-14 0,-30" fill="rgba(74, 124, 89, 0.05)" />
           </g>
         ))}
 
-        {/* Runner silhouette on the trail — very subtle */}
+        {/* Runner silhouette on trail */}
         <g transform="translate(620, 688) scale(0.4)" opacity="0.12" className="runner-move">
-          {/* Simplified running figure */}
-          <circle cx="0" cy="-18" r="4" fill="#06B6D4" />
-          <line x1="0" y1="-14" x2="0" y2="-2" stroke="#06B6D4" strokeWidth="2" strokeLinecap="round" />
-          <line x1="0" y1="-2" x2="-6" y2="8" stroke="#06B6D4" strokeWidth="1.5" strokeLinecap="round" />
-          <line x1="0" y1="-2" x2="6" y2="8" stroke="#06B6D4" strokeWidth="1.5" strokeLinecap="round" />
-          <line x1="0" y1="-10" x2="-7" y2="-4" stroke="#06B6D4" strokeWidth="1.5" strokeLinecap="round" />
-          <line x1="0" y1="-10" x2="5" y2="-14" stroke="#06B6D4" strokeWidth="1.5" strokeLinecap="round" />
+          <circle cx="0" cy="-18" r="4" fill="#4A7C59" />
+          <line x1="0" y1="-14" x2="0" y2="-2" stroke="#4A7C59" strokeWidth="2" strokeLinecap="round" />
+          <line x1="0" y1="-2" x2="-6" y2="8" stroke="#4A7C59" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="0" y1="-2" x2="6" y2="8" stroke="#4A7C59" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="0" y1="-10" x2="-7" y2="-4" stroke="#4A7C59" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="0" y1="-10" x2="5" y2="-14" stroke="#4A7C59" strokeWidth="1.5" strokeLinecap="round" />
         </g>
 
         {/* Shooting star */}
         <line
           x1="300" y1="60"
           x2="380" y2="100"
-          stroke="rgba(248, 250, 252, 0.3)"
+          stroke="rgba(242, 237, 228, 0.3)"
           strokeWidth="1"
           strokeLinecap="round"
           className="shooting-star"
