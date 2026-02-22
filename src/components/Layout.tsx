@@ -1,4 +1,4 @@
-import { ReactNode, useState, useEffect } from 'react';
+import { ReactNode, useState, useEffect, useRef } from 'react';
 import { Github, Linkedin, Mail, Menu, X } from 'lucide-react';
 
 interface LayoutProps {
@@ -17,27 +17,66 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
   const [activeSection, setActiveSection] = useState('');
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [hasCursor, setHasCursor] = useState(false);
+  const rafRef = useRef<number | null>(null);
 
+  // Cursor spotlight — set CSS custom properties directly on DOM (no re-renders)
   useEffect(() => {
-    const handleScroll = (): void => {
-      setScrolled(window.scrollY > 20);
+    const canHover = window.matchMedia('(hover: hover)').matches;
+    setHasCursor(canHover);
+    if (!canHover) return;
 
-      const sections = navLinks.map(l => l.href.slice(1));
-      let current = '';
-      for (const id of sections) {
-        const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 100) {
-            current = id;
-          }
-        }
-      }
-      setActiveSection(current);
+    let ticking = false;
+    const handleMouseMove = (e: MouseEvent) => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+        document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+        ticking = false;
+      });
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  // Scroll: active section + progress bar
+  useEffect(() => {
+    let ticking = false;
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 20);
+
+        // Scroll progress
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        setScrollProgress(docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0);
+
+        // Active section detection
+        const sections = navLinks.map(l => l.href.slice(1));
+        let current = '';
+        for (const id of sections) {
+          const el = document.getElementById(id);
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= 100) {
+              current = id;
+            }
+          }
+        }
+        setActiveSection(current);
+        ticking = false;
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
   }, []);
 
   const handleNavClick = (href: string): void => {
@@ -50,6 +89,15 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
 
   return (
     <div className="min-h-screen bg-slate-dark">
+      {/* Scroll Progress Bar */}
+      <div
+        className="scroll-progress"
+        style={{ width: `${scrollProgress}%` }}
+      />
+
+      {/* Cursor Spotlight */}
+      {hasCursor && <div className="cursor-spotlight" />}
+
       {/* Sticky Navbar */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled ? 'bg-slate-dark/90 backdrop-blur-md border-b border-slate-light/20 shadow-lg' : 'bg-transparent'
@@ -115,10 +163,10 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
       </nav>
 
       {/* Main Content */}
-      <main>{children}</main>
+      <main className="relative z-[2]">{children}</main>
 
       {/* Footer */}
-      <footer className="bg-slate-mid border-t border-slate-light/20">
+      <footer className="relative z-[2] bg-slate-mid border-t border-slate-light/20">
         <div className="max-w-6xl mx-auto px-4 py-12">
           <div className="flex justify-center space-x-8">
             <a

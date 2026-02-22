@@ -43,41 +43,43 @@ const ExperienceAccordion = ({
         />
       </div>
     </button>
-    {isOpen && (
-      <div
-        id={`experience-${role.toLowerCase().replace(/\s+/g, '-')}`}
-        className="mt-2 px-6 sm:px-8 py-6 bg-slate-mid rounded-xl border border-slate-light/20"
-      >
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-gray-500 mb-5 text-sm">
-          <span className="text-gray-300 sm:hidden">{period}</span>
-          <div className="flex items-center gap-1.5">
-            <MapPin size={16} />
-            <span>{location}</span>
+    <div
+      id={`experience-${role.toLowerCase().replace(/\s+/g, '-')}`}
+      className={`accordion-content mt-2 ${isOpen ? 'open' : ''}`}
+    >
+      <div>
+        <div className="px-6 sm:px-8 py-6 bg-slate-mid rounded-xl border border-slate-light/20">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-gray-500 mb-5 text-sm">
+            <span className="text-gray-300 sm:hidden">{period}</span>
+            <div className="flex items-center gap-1.5">
+              <MapPin size={16} />
+              <span>{location}</span>
+            </div>
+            {website && (
+              <>
+                <span>&bull;</span>
+                <div className="flex items-center gap-1.5">
+                  <LinkIcon size={16} />
+                  <a href={`https://${website}`} target="_blank" rel="noopener noreferrer" className="hover:text-teal transition-colors">
+                    {website}
+                  </a>
+                </div>
+              </>
+            )}
           </div>
-          {website && (
-            <>
-              <span>&bull;</span>
-              <div className="flex items-center gap-1.5">
-                <LinkIcon size={16} />
-                <a href={`https://${website}`} target="_blank" rel="noopener noreferrer" className="hover:text-teal transition-colors">
-                  {website}
-                </a>
-              </div>
-            </>
-          )}
-        </div>
-        <p className="text-gray-300 mb-5 leading-relaxed">
-          {description}
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {tech.map((item, index) => (
-            <span key={index} className="px-3 py-1.5 bg-teal/10 text-teal rounded-full text-xs font-medium border border-teal/20">
-              {item}
-            </span>
-          ))}
+          <p className="text-gray-300 mb-5 leading-relaxed">
+            {description}
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {tech.map((item, index) => (
+              <span key={index} className="px-3 py-1.5 bg-teal/10 text-teal rounded-full text-xs font-medium border border-teal/20">
+                {item}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
-    )}
+    </div>
   </div>
 );
 
