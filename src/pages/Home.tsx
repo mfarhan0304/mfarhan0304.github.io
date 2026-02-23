@@ -280,7 +280,7 @@ const Home = (): JSX.Element => {
           </div>
           <div className="max-w-4xl scroll-reveal" style={{ transitionDelay: '0.1s' }}>
             <ExperienceAccordion
-              role="Software Engineer @ Legali AI"
+              role="Part-time Software Engineer @ Legali AI"
               period="Oct 2025 – Present"
               description="Built a SaaS subscription system for the platform. Designed and implemented an LLM router agent that reduced latency by 35%. Developed automatic agent chaining for complex legal document workflows."
               tech={['Python', 'Agno', 'LLM', 'SaaS']}
@@ -318,16 +318,6 @@ const Home = (): JSX.Element => {
               website="https://www.pinhome.id"
               isOpen={openExperience === 3}
               onToggle={() => toggleExperience(3)}
-            />
-            <ExperienceAccordion
-              role="Part-time AI Engineer @ eftax Co., Ltd."
-              period="2020"
-              description="Developed AI-powered solutions for document processing and data extraction workflows."
-              tech={['Python', 'Machine Learning', 'NLP']}
-              location="Remote"
-              website=""
-              isOpen={openExperience === 4}
-              onToggle={() => toggleExperience(4)}
             />
           </div>
         </div>
