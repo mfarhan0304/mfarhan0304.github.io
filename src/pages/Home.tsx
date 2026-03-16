@@ -7,6 +7,39 @@ import SectionMountainAccent from '../components/SectionMountainAccent';
 
 const projects = [
   {
+    title: "Nexus",
+    description: "Capital readiness analysis platform with an AI-powered coaching chatbot that guides users through financial stress testing and scenario planning.",
+    image: "",
+    tech: ['React', 'TypeScript', 'AI Chatbot'],
+    links: {
+      live: 'https://nexus-coral-beta.vercel.app/',
+      github: ''
+    },
+    categories: ["Web Development", "LLM Integration"]
+  },
+  {
+    title: "Hero.je",
+    description: "Full-stack non-custodial multi-chain trading app with chain-abstracted transaction routing, gasless USDC execution via Privy and OneBalance, and delegated wallet signing for copy trading.",
+    image: "",
+    tech: ['Go', 'React Native', 'AWS', 'Privy', 'Web3', 'GitHub Actions'],
+    links: {
+      live: 'https://hero.je/',
+      github: ''
+    },
+    categories: ["Web Development", "Web3"]
+  },
+  {
+    title: "MarketMind MCP",
+    description: "Open-source financial research MCP server for capital markets analysis exposing real-time market data, RSI computation, and streaming AI analyst reports as composable tools.",
+    image: "",
+    tech: ['Python', 'FastMCP', 'LangGraph', 'Pydantic AI', 'OpenAI SDK'],
+    links: {
+      live: '',
+      github: 'https://github.com/mfarhan0304/MCP-MarketMind'
+    },
+    categories: ["AI/ML", "LLM Integration"]
+  },
+  {
     title: "Emojify",
     description: "Transform your photo into an emoji with AI and have real time feed to share your cute emoji.",
     image: "/projects/emojify/1.png",
@@ -280,10 +313,10 @@ const Home = (): JSX.Element => {
           </div>
           <div className="max-w-4xl scroll-reveal" style={{ transitionDelay: '0.1s' }}>
             <ExperienceAccordion
-              role="Part-time Software Engineer @ Legali AI"
-              period="Oct 2025 – Present"
-              description="Built a SaaS subscription system for the platform. Designed and implemented an LLM router agent that reduced latency by 35%. Developed automatic agent chaining for complex legal document workflows."
-              tech={['Python', 'Agno', 'LLM', 'SaaS']}
+              role="Software Engineer @ Legali AI"
+              period="Nov 2025 – Present"
+              description="Consolidated 15 chained microservices into a deterministic state machine, cutting end-to-end turn latency from 3–8s to 1–2s. Designed a Python intent classification router with Redis caching that reduced API latency by 35% and per-session compute cost by 70%. Built WebSocket and SSE layers for a real-time voice assistant and streaming response interface. Designed REST APIs for a multi-tenant SaaS platform with role-based permissions and tiered Stripe billing."
+              tech={['Go', 'TypeScript', 'Cloudflare Workers', 'Python', 'Redis', 'WebSocket', 'SSE', 'Stripe']}
               location="Remote – San Francisco"
               website="https://legali.ai/"
               isOpen={openExperience === 0}
