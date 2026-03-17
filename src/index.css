@@ -73,6 +73,31 @@
     @apply bg-slate-mid text-white px-6 py-3 rounded-lg font-medium border border-slate-light hover:border-teal hover:text-teal transition-all duration-300;
   }
 
+  /* Chips / badges */
+  .chip {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border;
+  }
+
+  .chip-forest {
+    @apply bg-teal/15 border-teal/40 text-teal;
+  }
+
+  .chip-forest-subtle {
+    @apply bg-slate-mid/70 border-slate-light/40 text-gray-300;
+  }
+
+  .chip-muted {
+    @apply bg-slate-mid/70 border-slate-light/40 text-gray-500;
+  }
+
+  .badge-forest {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-teal/15 text-teal border border-teal/30 font-fira tracking-wider;
+  }
+
+  .icon-btn {
+    @apply inline-flex items-center justify-center w-8 h-8 rounded-full border border-slate-light/40 bg-slate-mid/70 text-gray-300 hover:border-teal hover:text-teal disabled:opacity-40 disabled:hover:text-gray-300 disabled:hover:border-slate-light/40 transition-colors;
+  }
+
   /* Cards */
   .card {
     @apply bg-slate-mid rounded-2xl shadow-lg border border-slate-light/30 hover:shadow-xl hover:border-teal/30 transition-all duration-300;

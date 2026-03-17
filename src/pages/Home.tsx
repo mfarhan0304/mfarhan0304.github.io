@@ -1,111 +1,87 @@
-import { Github, Linkedin, Mail, MapPin, GraduationCap, Mountain, Waves, Trophy, Plane } from 'lucide-react';
+import { Github, Linkedin, Mail, MapPin, GraduationCap, Mountain, Trophy, Plane } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import ExperienceAccordion from '../components/ExperienceAccordion';
 import TopographicBackground from '../components/TopographicBackground';
-import MuseumGallery from '../components/MuseumGallery';
 import SectionMountainAccent from '../components/SectionMountainAccent';
+import MuseumGallery from '../components/MuseumGallery';
+import CatalogGrid, { type CatalogItem } from '../components/CatalogGrid';
 
 const projects = [
   {
-    title: "Nexus",
-    description: "Capital readiness analysis platform with an AI-powered coaching chatbot that guides users through financial stress testing and scenario planning.",
-    image: "",
-    tech: ['React', 'TypeScript', 'AI Chatbot'],
-    links: {
-      live: 'https://nexus-coral-beta.vercel.app/',
-      github: ''
-    },
-    categories: ["Web Development", "LLM Integration"]
-  },
-  {
-    title: "Hero.je",
-    description: "Full-stack non-custodial multi-chain trading app with chain-abstracted transaction routing, gasless USDC execution via Privy and OneBalance, and delegated wallet signing for copy trading.",
-    image: "",
+    title: 'Hero.je',
+    description:
+      'Non-custodial multi-chain trading app with chain-abstracted routing, gasless USDC execution via Privy and OneBalance, and delegated wallet signing for copy trading.',
+    image: '',
     tech: ['Go', 'React Native', 'AWS', 'Privy', 'Web3', 'GitHub Actions'],
     links: {
       live: 'https://hero.je/',
-      github: ''
+      github: '',
     },
-    categories: ["Web Development", "Web3"]
+    categories: ['Web Development', 'Web3'],
   },
   {
-    title: "MarketMind MCP",
-    description: "Open-source financial research MCP server for capital markets analysis exposing real-time market data, RSI computation, and streaming AI analyst reports as composable tools.",
-    image: "",
+    title: 'MarketMind MCP',
+    description:
+      'Open-source MCP server for capital markets research that streams real-time market data, RSI indicators, and AI analyst commentary into any compatible client.',
+    image: '/projects/marketmind-mcp/1.png',
     tech: ['Python', 'FastMCP', 'LangGraph', 'Pydantic AI', 'OpenAI SDK'],
     links: {
       live: '',
-      github: 'https://github.com/mfarhan0304/MCP-MarketMind'
+      github: 'https://github.com/mfarhan0304/MCP-MarketMind',
     },
-    categories: ["AI/ML", "LLM Integration"]
+    categories: ['AI/ML', 'LLM Integration'],
   },
   {
-    title: "Emojify",
-    description: "Transform your photo into an emoji with AI and have real time feed to share your cute emoji.",
-    image: "/projects/emojify/1.png",
-    tech: ['Supabase', 'TypeScript', 'Node.js', 'PostgreSQL', 'Gemini API'],
+    title: 'Nexus - BMC Stress Tester',
+    description:
+      'Full-stack LLM-powered capital readiness scorer. Backend ingests Business Model Canvas documents, runs structured OpenAI analysis to score funding readiness, and generates investor-style feedback; frontend delivers upload flow, results dashboard, and a stateful coaching chatbot.',
+    image: '/projects/nexus/3.png',
+    tech: ['React', 'TypeScript', 'Node.js', 'OpenAI API'],
     links: {
-      live: 'https://emojify-alpha.vercel.app/',
-      github: 'https://github.com/mfarhan0304/emojify'
+      live: 'https://nexus-coral-beta.vercel.app/',
+      github: '',
     },
-    categories: ["Web Development", "LLM Integration"]
+    categories: ['Web Development', 'LLM Integration'],
   },
   {
-    title: "Pulse of Personas",
-    description: "AI-powered marketing platform that transforms campaigns with real-time sentiment analysis and adaptive personalization.",
-    image: "/projects/pulse/1.png",
+    title: 'Pulse of Personas',
+    description:
+      'AI-powered marketing platform that transforms campaigns with real-time sentiment analysis and adaptive personalization.',
+    image: '/projects/pulse/1.png',
     tech: ['React', 'TypeScript', 'Node.js', 'MongoDB', 'OpenAI API'],
     links: {
       live: 'https://pulse-of-personas.vercel.app/',
-      github: 'https://github.com/mfarhan0304/pulse-of-personas'
+      github: 'https://github.com/mfarhan0304/pulse-of-personas',
     },
-    categories: ["Web Development", "LLM Integration"]
+    categories: ['Web Development', 'LLM Integration'],
   },
   {
-    title: "NYU Indonesian Night",
-    description: "Interactive cultural showcase featuring Javanese astrology and language games, bringing Indonesian heritage to life.",
-    image: "/projects/indonesian/1.png",
+    title: 'NYU Indonesian Night',
+    description:
+      'Interactive cultural showcase site for NYU Indonesian Night, featuring Javanese astrology, language mini-games, and storytelling to bring Indonesian heritage to life.',
+    image: '/projects/indonesian/1.png',
     tech: ['React', 'TypeScript', 'Tailwind CSS'],
     links: {
       live: 'https://nyu-indonesian-night.vercel.app/',
-      github: 'https://github.com/mfarhan0304/nyu-indonesian-night'
+      github: 'https://github.com/mfarhan0304/nyu-indonesian-night',
     },
-    categories: ["Web Development"]
+    categories: ['Web Development'],
   },
   {
-    title: "IPO Performance Prediction",
-    description: "Predictive analytics pipeline using textual analysis of SEC filings and social media sentiment to forecast IPO performance.",
-    image: "",
-    tech: ['Python', 'NLP', 'Predictive Analytics'],
+    title: 'Twitter Content & Engagement Agent',
+    description:
+      'AI agent built on OpenClaw that analyzes a target Twitter account’s timeline and topic patterns, generates contextually relatable content, and autonomously engages with the audience for growth.',
+    image: '',
+    tech: ['Python', 'OpenClaw', 'OpenAI API'],
     links: {
       live: '',
-      github: 'https://github.com/mfarhan0304'
+      github: 'https://github.com/mfarhan0304/OpenClaw-Content',
     },
-    categories: ["AI/ML", "Data Science"]
+    categories: ['AI/ML', 'Automation'],
   },
-  {
-    title: "IELTS Writing Assistant",
-    description: "AI-powered IELTS tutor with GPT-based scoring that provides detailed feedback and band score predictions.",
-    image: "",
-    tech: ['Python', 'OpenAI API', 'NLP'],
-    links: {
-      live: '',
-      github: 'https://github.com/mfarhan0304'
-    },
-    categories: ["AI/ML", "LLM Integration"]
-  },
-  {
-    title: "Langone Health MRI Simulation",
-    description: "Docker-integrated CI/CD pipeline on AWS with serverless compute for MRI simulation workloads.",
-    image: "",
-    tech: ['Docker', 'AWS', 'CI/CD'],
-    links: {
-      live: '',
-      github: 'https://github.com/mfarhan0304'
-    },
-    categories: ["DevOps", "Cloud"]
-  }
 ];
+
+const featuredProjects = projects.slice(0, 3);
 
 const skillCategories = [
   { label: 'Languages', skills: ['Golang', 'Python', 'JavaScript', 'TypeScript', 'Java'] },
@@ -153,6 +129,7 @@ const Home = (): JSX.Element => {
 
   const aboutRef = useScrollReveal();
   const experienceRef = useScrollReveal();
+  const catalogRef = useScrollReveal();
   const educationRef = useScrollReveal();
   const contactRef = useScrollReveal();
 
@@ -174,7 +151,7 @@ const Home = (): JSX.Element => {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           <div className="max-w-3xl">
             <p className={`section-label mb-6 ${heroVisible ? 'clip-reveal' : 'opacity-0'}`}>
-              Software Engineer
+              Runner • Software Engineer
             </p>
             <h1
               className={`text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-white mb-2 leading-[0.95] tracking-tight ${heroVisible ? 'clip-reveal' : 'opacity-0'}`}
@@ -192,14 +169,13 @@ const Home = (): JSX.Element => {
               className={`text-lg md:text-xl text-gray-300 max-w-xl leading-relaxed mb-4 ${heroVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
               style={{ animationDelay: '0.6s' }}
             >
-              Building scalable systems and AI-powered products.
-              From enterprise platforms in Indonesia to cutting-edge AI in New York City.
+              I build scalable systems and AI-powered products, then I go outside and run until my thoughts get quiet.
             </p>
             <p
               className={`text-gray-500 text-sm italic mb-10 ${heroVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
               style={{ animationDelay: '0.8s' }}
             >
-              "Follow your heart but take your brain with you."
+              "Follow your heart, but take your brain with you."
             </p>
             <div
               className={`flex gap-4 ${heroVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
@@ -256,13 +232,12 @@ const Home = (): JSX.Element => {
               NYU Indonesian Student Association, and an LPDP scholar.
             </p>
             <p className="text-gray-300 text-lg leading-relaxed mb-6">
-              I'm passionate about bridging enterprise-scale engineering with cutting-edge AI — building things
+              I'm passionate about bridging enterprise-scale engineering with cutting-edge AI, building things
               that are both robust and intelligent.
             </p>
             <p className="text-gray-300 text-lg leading-relaxed">
-              When I'm not coding, you'll find me running marathons, hiking national parks, freediving,
-              or exploring a new city. I bring the same curiosity and endurance to my engineering work
-              as I do to a trail or a starting line.
+              When I'm not coding, you'll find me running, hiking, or chasing quiet views.
+              Running taught me the best systems are like good training blocks: consistent, measurable, and built for the long haul.
             </p>
           </div>
 
@@ -357,17 +332,17 @@ const Home = (): JSX.Element => {
       </section>
 
       {/* ============================================
-          PROJECTS — MUSEUM GALLERY
+          PROJECT MUSEUM
           ============================================ */}
       <section id="projects" className="bg-slate-mid/50 relative">
         <SectionMountainAccent position="top" variant="medium" />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-28 pb-8">
           <div className="scroll-reveal">
-            <span className="section-label mb-3 block">03 / Work</span>
-            <h2 className="text-4xl md:text-5xl font-bold text-white">Selected Projects</h2>
+            <span className="section-label mb-3 block">03 / Project Museum</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-white">Flagship Work</h2>
           </div>
         </div>
-        <MuseumGallery projects={projects} />
+        <MuseumGallery projects={featuredProjects} featuredCount={4} />
       </section>
 
       {/* ============================================
@@ -433,14 +408,9 @@ const Home = (): JSX.Element => {
           </div>
           <div className="max-w-2xl scroll-reveal" style={{ transitionDelay: '0.1s' }}>
             <p className="text-gray-300 text-lg mb-10 leading-relaxed">
-              I'm always interested in hearing about new projects and opportunities.
-              Whether you have a question or just want to say hi, feel free to reach out!
+              If you want to build something ambitious, or you’re in NYC and want to talk systems over a run, reach out.
             </p>
             <div className="flex flex-col sm:flex-row items-start gap-6 mb-10">
-              <div className="flex items-center gap-2 text-gray-300">
-                <Mail size={18} className="text-teal" />
-                <span>mfarhan0304@gmail.com</span>
-              </div>
               <div className="flex items-center gap-2 text-gray-300">
                 <MapPin size={18} className="text-teal" />
                 <span>New York, United States</span>
