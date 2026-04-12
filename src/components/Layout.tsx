@@ -1,5 +1,5 @@
 import { ReactNode, useState, useEffect, useRef } from 'react';
-import { Github, Linkedin, Mail, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import RunningTrail from './RunningTrail';
 
 interface LayoutProps {

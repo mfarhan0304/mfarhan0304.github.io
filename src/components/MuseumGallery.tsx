@@ -253,16 +253,18 @@ const MuseumGallery = ({ projects, featuredCount = 3 }: MuseumGalleryProps): JSX
     </button>
   );
 
-  // Scroll to the project matching the URL hash on load (desktop)
+  // Scroll to the project matching the URL hash on load
   useEffect(() => {
-    if (!isDesktop) return;
     const hash = window.location.hash.slice(1);
     if (!hash) return;
     const idx = featured.findIndex((p) => slugify(p.title) === hash);
     if (idx === -1) return;
 
-    // Wait for layout then scroll to the sticky container position for that project
-    requestAnimationFrame(() => {
+    const navigate = () => {
+      if (!isDesktop) {
+        document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
       if (!containerRef.current) return;
       const containerHeight = containerRef.current.offsetHeight;
       const scrollableDistance = containerHeight - window.innerHeight;
@@ -271,7 +273,14 @@ const MuseumGallery = ({ projects, featuredCount = 3 }: MuseumGalleryProps): JSX
         containerRef.current.offsetTop +
         (idx / Math.max(1, featured.length - 1)) * scrollableDistance;
       window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-    });
+    };
+
+    // Wait for full page layout before computing positions
+    if (document.readyState === 'complete') {
+      setTimeout(navigate, 150);
+    } else {
+      window.addEventListener('load', () => setTimeout(navigate, 150), { once: true });
+    }
   }, [isDesktop, featured]);
 
   // Mobile: vertical card stack (featured only) + view all
