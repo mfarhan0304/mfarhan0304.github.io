@@ -4,7 +4,6 @@ import ExperienceAccordion from '../components/ExperienceAccordion';
 import TopographicBackground from '../components/TopographicBackground';
 import SectionMountainAccent from '../components/SectionMountainAccent';
 import MuseumGallery from '../components/MuseumGallery';
-import CatalogGrid, { type CatalogItem } from '../components/CatalogGrid';
 
 const projects = [
   {
@@ -129,7 +128,6 @@ const Home = (): JSX.Element => {
 
   const aboutRef = useScrollReveal();
   const experienceRef = useScrollReveal();
-  const catalogRef = useScrollReveal();
   const educationRef = useScrollReveal();
   const contactRef = useScrollReveal();
 
