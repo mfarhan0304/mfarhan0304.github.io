@@ -1,6 +1,9 @@
 import { useRef, useState, useEffect } from 'react';
 import { Github, ExternalLink, Code2, X, LayoutGrid } from 'lucide-react';
 
+const slugify = (title: string) =>
+  title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
 interface GalleryProject {
   title: string;
   description: string;
@@ -124,6 +127,7 @@ const ProjectsModal = ({
           {filtered.map((project) => (
             <div
               key={project.title}
+              id={slugify(project.title)}
               className="group bg-slate-dark/60 rounded-xl border border-slate-light/20 overflow-hidden hover:border-teal/30 transition-all duration-300"
             >
               {/* Image */}
@@ -247,13 +251,34 @@ const MuseumGallery = ({ projects, featuredCount = 3 }: MuseumGalleryProps): JSX
     </button>
   );
 
+  // Scroll to the project matching the URL hash on load (desktop)
+  useEffect(() => {
+    if (!isDesktop) return;
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
+    const idx = featured.findIndex((p) => slugify(p.title) === hash);
+    if (idx === -1) return;
+
+    // Wait for layout then scroll to the sticky container position for that project
+    requestAnimationFrame(() => {
+      if (!containerRef.current) return;
+      const containerHeight = containerRef.current.offsetHeight;
+      const scrollableDistance = containerHeight - window.innerHeight;
+      if (scrollableDistance <= 0) return;
+      const targetScroll =
+        containerRef.current.offsetTop +
+        (idx / Math.max(1, featured.length - 1)) * scrollableDistance;
+      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+    });
+  }, [isDesktop, featured]);
+
   // Mobile: vertical card stack (featured only) + view all
   if (!isDesktop) {
     return (
       <>
         <div className="space-y-8 px-4 pb-10">
           {featured.map((project, i) => (
-            <div key={project.title} className="animate-fade-in-up" style={{ animationDelay: `${i * 0.15}s` }}>
+            <div key={project.title} id={slugify(project.title)} className="animate-fade-in-up" style={{ animationDelay: `${i * 0.15}s` }}>
               <div className="gallery-image-container" style={{ height: '200px' }}>
                 {project.image ? (
                   <img src={project.image} alt={project.title} loading="lazy" />
@@ -324,7 +349,7 @@ const MuseumGallery = ({ projects, featuredCount = 3 }: MuseumGalleryProps): JSX
             style={{ transform: `translateX(-${translateX}px)` }}
           >
             {featured.map((project, i) => (
-              <div key={project.title} className="gallery-slide">
+              <div key={project.title} id={slugify(project.title)} className="gallery-slide">
                 <div className="gallery-slide-inner">
                   {/* Image */}
                   <div className="gallery-image-container">

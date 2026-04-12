@@ -10,11 +10,10 @@ const projects = [
     title: 'Hero.je',
     description:
       'Non-custodial multi-chain trading app with chain-abstracted routing, gasless USDC execution via Privy and OneBalance, and delegated wallet signing for copy trading.',
-    image: '',
+    image: '/projects/hero-je/1.png',
     tech: ['Go', 'React Native', 'AWS', 'Privy', 'Web3', 'GitHub Actions'],
     links: {
       live: 'https://hero.je/',
-      github: '',
     },
     categories: ['Web Development', 'Web3'],
   },
@@ -25,7 +24,6 @@ const projects = [
     image: '/projects/marketmind-mcp/1.png',
     tech: ['Python', 'FastMCP', 'LangGraph', 'Pydantic AI', 'OpenAI SDK'],
     links: {
-      live: '',
       github: 'https://github.com/mfarhan0304/MCP-MarketMind',
     },
     categories: ['AI/ML', 'LLM Integration'],
@@ -38,7 +36,6 @@ const projects = [
     tech: ['React', 'TypeScript', 'Node.js', 'OpenAI API'],
     links: {
       live: 'https://nexus-coral-beta.vercel.app/',
-      github: '',
     },
     categories: ['Web Development', 'LLM Integration'],
   },
@@ -73,7 +70,6 @@ const projects = [
     image: '',
     tech: ['Python', 'OpenClaw', 'OpenAI API'],
     links: {
-      live: '',
       github: 'https://github.com/mfarhan0304/OpenClaw-Content',
     },
     categories: ['AI/ML', 'Automation'],
