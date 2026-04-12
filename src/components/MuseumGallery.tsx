@@ -9,7 +9,7 @@ interface GalleryProject {
   description: string;
   image: string;
   tech: string[];
-  links: { live: string; github: string };
+  links: { live?: string; github?: string };
   categories: string[];
 }
 
@@ -173,14 +173,16 @@ const ProjectsModal = ({
                       <ExternalLink size={13} /> Live
                     </a>
                   )}
-                  <a
-                    href={project.links.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-xs text-gray-300 hover:text-teal transition-colors"
-                  >
-                    <Github size={13} /> Code
-                  </a>
+                  {project.links.github && (
+                    <a
+                      href={project.links.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 text-xs text-gray-300 hover:text-teal transition-colors"
+                    >
+                      <Github size={13} /> Code
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
@@ -310,14 +312,16 @@ const MuseumGallery = ({ projects, featuredCount = 3 }: MuseumGalleryProps): JSX
                       <ExternalLink size={14} /> Live
                     </a>
                   )}
-                  <a
-                    href={project.links.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-sm text-gray-300 hover:text-teal transition-colors"
-                  >
-                    <Github size={14} /> Code
-                  </a>
+                  {project.links.github && (
+                    <a
+                      href={project.links.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 text-sm text-gray-300 hover:text-teal transition-colors"
+                    >
+                      <Github size={14} /> Code
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
@@ -389,14 +393,16 @@ const MuseumGallery = ({ projects, featuredCount = 3 }: MuseumGalleryProps): JSX
                           <ExternalLink size={16} /> View Live
                         </a>
                       )}
-                      <a
-                        href={project.links.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-sm text-gray-300 hover:text-teal transition-colors duration-300"
-                      >
-                        <Github size={16} /> Source Code
-                      </a>
+                      {project.links.github && (
+                        <a
+                          href={project.links.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-sm text-gray-300 hover:text-teal transition-colors duration-300"
+                        >
+                          <Github size={16} /> Source Code
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
