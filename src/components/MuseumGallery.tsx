@@ -253,35 +253,41 @@ const MuseumGallery = ({ projects, featuredCount = 3 }: MuseumGalleryProps): JSX
     </button>
   );
 
-  // Scroll to the project matching the URL hash on load
+  // Scroll to the project matching the URL hash — runs once on mount only
   useEffect(() => {
     const hash = window.location.hash.slice(1);
     if (!hash) return;
-    const idx = featured.findIndex((p) => slugify(p.title) === hash);
+    const idx = projects.findIndex((p) => slugify(p.title) === hash);
     if (idx === -1) return;
 
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
     const navigate = () => {
-      if (!isDesktop) {
-        document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
+      // Read from window directly to avoid stale closure over isDesktop state
+      if (window.innerWidth < 768) {
+        const el = document.getElementById(hash);
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top, behavior: 'instant' });
+        }
         return;
       }
       if (!containerRef.current) return;
       const containerHeight = containerRef.current.offsetHeight;
       const scrollableDistance = containerHeight - window.innerHeight;
       if (scrollableDistance <= 0) return;
+      const containerTop = containerRef.current.getBoundingClientRect().top + window.scrollY;
       const targetScroll =
-        containerRef.current.offsetTop +
-        (idx / Math.max(1, featured.length - 1)) * scrollableDistance;
-      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+        containerTop + (idx / Math.max(1, featured.length - 1)) * scrollableDistance;
+      window.scrollTo({ top: targetScroll, behavior: 'instant' });
     };
 
-    // Wait for full page layout before computing positions
     if (document.readyState === 'complete') {
       setTimeout(navigate, 150);
     } else {
       window.addEventListener('load', () => setTimeout(navigate, 150), { once: true });
     }
-  }, [isDesktop, featured]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Mobile: vertical card stack (featured only) + view all
   if (!isDesktop) {

@@ -76,8 +76,6 @@ const projects = [
   },
 ];
 
-const featuredProjects = projects.slice(0, 3);
-
 const skillCategories = [
   { label: 'Languages', skills: ['Golang', 'Python', 'JavaScript', 'TypeScript', 'Java'] },
   { label: 'Backend & Data', skills: ['PostgreSQL', 'MongoDB', 'Supabase', 'Kafka', 'Redis', 'FAISS'] },
@@ -336,7 +334,7 @@ const Home = (): JSX.Element => {
             <h2 className="text-4xl md:text-5xl font-bold text-white">Flagship Work</h2>
           </div>
         </div>
-        <MuseumGallery projects={featuredProjects} featuredCount={4} />
+        <MuseumGallery projects={projects} featuredCount={3} />
       </section>
 
       {/* ============================================
