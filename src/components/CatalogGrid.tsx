@@ -32,10 +32,10 @@ const CatalogGrid = ({ items }: CatalogGridProps): JSX.Element => {
     [items, activeFilter]
   );
 
-  const kindLabel = (kind: CatalogKind) =>
+  const kindLabel = (kind: CatalogKind): string =>
     kind === 'Run' ? 'Run log' : 'Project';
 
-  const kindColor = (kind: CatalogKind) =>
+  const kindColor = (kind: CatalogKind): string =>
     kind === 'Run' ? 'bg-teal/10 text-teal border-teal/40' : 'bg-slate-mid/80 text-gray-300 border-slate-light/40';
 
   return (
@@ -159,4 +159,3 @@ const CatalogGrid = ({ items }: CatalogGridProps): JSX.Element => {
 };
 
 export default CatalogGrid;
-

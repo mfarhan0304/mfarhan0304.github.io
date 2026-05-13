@@ -4,6 +4,7 @@ interface ExperienceAccordionProps {
   role: string;
   period: string;
   description: string;
+  highlights?: string[];
   tech: string[];
   location: string;
   website: string;
@@ -15,6 +16,7 @@ const ExperienceAccordion = ({
   role,
   period,
   description,
+  highlights = [],
   tech,
   location,
   website,
@@ -67,9 +69,19 @@ const ExperienceAccordion = ({
               </>
             )}
           </div>
-          <p className="text-gray-300 mb-5 leading-relaxed">
+          <p className="text-gray-300 mb-4 leading-relaxed">
             {description}
           </p>
+          {highlights.length > 0 && (
+            <ul className="space-y-2 mb-5">
+              {highlights.map((highlight) => (
+                <li key={highlight} className="flex gap-2 text-sm text-gray-300 leading-relaxed">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal" />
+                  <span>{highlight}</span>
+                </li>
+              ))}
+            </ul>
+          )}
           <div className="flex flex-wrap gap-2">
             {tech.map((item, index) => (
               <span key={index} className="px-3 py-1.5 bg-teal/10 text-teal rounded-full text-xs font-medium border border-teal/20">

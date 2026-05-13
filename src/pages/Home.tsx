@@ -1,4 +1,5 @@
 import { Github, Linkedin, Mail, MapPin, GraduationCap, Mountain, Trophy, Plane } from 'lucide-react';
+import type { RefObject } from 'react';
 import { useState, useEffect, useRef } from 'react';
 import ExperienceAccordion from '../components/ExperienceAccordion';
 import TopographicBackground from '../components/TopographicBackground';
@@ -7,42 +8,40 @@ import MuseumGallery from '../components/MuseumGallery';
 
 const projects = [
   {
-    title: 'Hero.je',
+    title: 'Little Lore',
     description:
-      'Non-custodial multi-chain trading app with chain-abstracted routing, gasless USDC execution via Privy and OneBalance, and delegated wallet signing for copy trading.',
+      'AI bedtime-story app with async LLM/TTS pipelines, content-safety checks, encrypted child PII, idempotent APIs, BullMQ job orchestration, Redis workers, and 200+ tests.',
+    image: '/projects/little-lore/1.png',
+    tech: ['Node.js', 'TypeScript', 'Fastify', 'Postgres', 'BullMQ', 'Redis'],
+    links: {},
+    categories: ['AI/ML', 'Backend'],
+  },
+  {
+    title: 'Hero – Web3 Social Trading Platform',
+    description:
+      'Real-time trading platform with Go microservices for order matching, delegated wallet signing, and order book updates over WebSockets; deployed on AWS and grew to a 10K+ testing waitlist.',
     image: '/projects/hero-je/1.png',
-    tech: ['Go', 'React Native', 'AWS', 'Privy', 'Web3', 'GitHub Actions'],
+    tech: ['Go', 'React Native', 'AWS', 'WebSockets', 'Wallet Signing', 'Web3'],
     links: {
       live: 'https://hero.je/',
     },
-    categories: ['Web Development', 'Web3'],
+    categories: ['Backend', 'Web3'],
   },
   {
     title: 'MarketMind MCP',
     description:
-      'Open-source MCP server for capital markets research that streams real-time market data, RSI indicators, and AI analyst commentary into any compatible client.',
+      'Python MCP server for capital markets analysis, orchestrating market data, news, and synthesis workflows with LangGraph, FastMCP, and real-time streaming into compatible clients.',
     image: '/projects/marketmind-mcp/1.png',
-    tech: ['Python', 'FastMCP', 'LangGraph', 'Pydantic AI', 'OpenAI SDK'],
+    tech: ['Python', 'FastMCP', 'LangGraph', 'OpenAI SDK', 'Streaming'],
     links: {
       github: 'https://github.com/mfarhan0304/MCP-MarketMind',
     },
     categories: ['AI/ML', 'LLM Integration'],
   },
   {
-    title: 'Nexus - BMC Stress Tester',
-    description:
-      'Full-stack LLM-powered capital readiness scorer. Backend ingests Business Model Canvas documents, runs structured OpenAI analysis to score funding readiness, and generates investor-style feedback; frontend delivers upload flow, results dashboard, and a stateful coaching chatbot.',
-    image: '/projects/nexus/3.png',
-    tech: ['React', 'TypeScript', 'Node.js', 'OpenAI API'],
-    links: {
-      live: 'https://nexus-coral-beta.vercel.app/',
-    },
-    categories: ['Web Development', 'LLM Integration'],
-  },
-  {
     title: 'Pulse of Personas',
     description:
-      'AI-powered marketing platform that transforms campaigns with real-time sentiment analysis and adaptive personalization.',
+      'Finalist project for the Bliss Group Innovation Challenge 2025: an AI-driven marketing platform with real-time sentiment analysis and adaptive ad targeting.',
     image: '/projects/pulse/1.png',
     tech: ['React', 'TypeScript', 'Node.js', 'MongoDB', 'OpenAI API'],
     links: {
@@ -52,16 +51,24 @@ const projects = [
     categories: ['Web Development', 'LLM Integration'],
   },
   {
-    title: 'NYU Indonesian Night',
+    title: 'Nexus - BMC Stress Tester',
     description:
-      'Interactive cultural showcase site for NYU Indonesian Night, featuring Javanese astrology, language mini-games, and storytelling to bring Indonesian heritage to life.',
-    image: '/projects/indonesian/1.png',
-    tech: ['React', 'TypeScript', 'Tailwind CSS'],
+      'LLM-powered capital readiness scorer that ingests Business Model Canvas documents, runs structured OpenAI analysis, and returns investor-style feedback through an upload flow, dashboard, and coaching chatbot.',
+    image: '/projects/nexus/3.png',
+    tech: ['React', 'TypeScript', 'Node.js', 'OpenAI API'],
     links: {
-      live: 'https://nyu-indonesian-night.vercel.app/',
-      github: 'https://github.com/mfarhan0304/nyu-indonesian-night',
+      live: 'https://nexus-coral-beta.vercel.app/',
     },
-    categories: ['Web Development'],
+    categories: ['Web Development', 'LLM Integration'],
+  },
+  {
+    title: 'Langone Health MRI Simulation',
+    description:
+      'Docker-integrated CI/CD pipeline on AWS Fargate that runs MRI simulation workloads as on-demand serverless functions and removes manual execution steps.',
+    image: '',
+    tech: ['Docker', 'AWS Fargate', 'CI/CD', 'Serverless'],
+    links: {},
+    categories: ['Infrastructure'],
   },
   {
     title: 'Twitter Content & Engagement Agent',
@@ -77,15 +84,15 @@ const projects = [
 ];
 
 const skillCategories = [
-  { label: 'Languages', skills: ['Golang', 'Python', 'JavaScript', 'TypeScript', 'Java'] },
-  { label: 'Backend & Data', skills: ['PostgreSQL', 'MongoDB', 'Supabase', 'Kafka', 'Redis', 'FAISS'] },
-  { label: 'AI & ML', skills: ['LLM Agents', 'OpenAI API', 'Gemini API', 'Agno', 'Predictive Analytics'] },
-  { label: 'Infrastructure', skills: ['Docker', 'Azure DevOps', 'AWS', 'CI/CD', 'Microservices'] },
-  { label: 'Frontend', skills: ['React', 'Node.js', 'Tailwind CSS'] },
-  { label: 'Other', skills: ['System Design', 'Product Management', 'A/B Testing'] },
+  { label: 'Languages', skills: ['Go', 'Python', 'Java', 'TypeScript'] },
+  { label: 'Backend APIs', skills: ['REST APIs', 'gRPC', 'WebSockets', 'Microservices', 'API Gateway'] },
+  { label: 'Data & Messaging', skills: ['PostgreSQL', 'MySQL', 'Redis', 'Elasticsearch', 'Kafka'] },
+  { label: 'AI Systems', skills: ['LLM Routing', 'MCP', 'LangGraph', 'FastMCP', 'OpenAI SDK'] },
+  { label: 'Cloud & DevOps', skills: ['Docker', 'AWS', 'Cloudflare', 'CI/CD', 'Prometheus'] },
+  { label: 'Systems', skills: ['Distributed Systems', 'System Design', 'RBAC', 'Observability'] },
 ];
 
-const useScrollReveal = () => {
+const useScrollReveal = (): RefObject<HTMLDivElement> => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -93,8 +100,8 @@ const useScrollReveal = () => {
     if (!el) return;
 
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      (entries): void => {
+        entries.forEach((entry): void => {
           if (entry.isIntersecting) {
             entry.target.classList.add('revealed');
             observer.unobserve(entry.target);
@@ -107,7 +114,7 @@ const useScrollReveal = () => {
     const children = el.querySelectorAll('.scroll-reveal');
     children.forEach((child) => observer.observe(child));
 
-    return () => observer.disconnect();
+    return (): void => observer.disconnect();
   }, []);
 
   return ref;
@@ -143,7 +150,7 @@ const Home = (): JSX.Element => {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           <div className="max-w-3xl">
             <p className={`section-label mb-6 ${heroVisible ? 'clip-reveal' : 'opacity-0'}`}>
-              Runner • Software Engineer
+              Backend Engineer • AI Systems • Runner
             </p>
             <h1
               className={`text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-white mb-2 leading-[0.95] tracking-tight ${heroVisible ? 'clip-reveal' : 'opacity-0'}`}
@@ -161,7 +168,7 @@ const Home = (): JSX.Element => {
               className={`text-lg md:text-xl text-gray-300 max-w-xl leading-relaxed mb-4 ${heroVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
               style={{ animationDelay: '0.6s' }}
             >
-              I build scalable systems and AI-powered products, then I go outside and run until my thoughts get quiet.
+              Backend engineer with 5+ years building scalable APIs, AI-native workflows, and high-volume transaction systems.
             </p>
             <p
               className={`text-gray-500 text-sm italic mb-10 ${heroVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
@@ -192,7 +199,7 @@ const Home = (): JSX.Element => {
                 <Linkedin size={22} />
               </a>
               <a
-                href="mailto:mfarhan0304@gmail.com"
+                href="mailto:m.farhan@nyu.edu"
                 className="p-3 bg-slate-mid text-gray-300 rounded-lg border border-slate-light/30 hover:border-teal hover:text-teal transition-all duration-300"
                 aria-label="Email"
               >
@@ -215,17 +222,16 @@ const Home = (): JSX.Element => {
           </div>
           <div className="max-w-3xl mb-16 scroll-reveal" style={{ transitionDelay: '0.1s' }}>
             <p className="text-gray-300 text-lg leading-relaxed mb-6">
-              I started my career building systems at Indonesia's biggest tech companies — Tokopedia and Telkomsel — where
-              I worked on real-time ML platforms, microservices architectures, and products serving millions of users.
+              I started my career building backend systems at Tokopedia and Telkomsel, where I worked on real-time ML feedback pipelines,
+              distributed point-of-sale systems, payment gateway services, and transaction platforms serving millions of users.
             </p>
             <p className="text-gray-300 text-lg leading-relaxed mb-6">
-              Now I'm pursuing my MS at New York University while building AI-powered products at Legali AI,
-              where I design LLM router agents and automatic agent chaining systems. I'm also the President of the
-              NYU Indonesian Student Association, and an LPDP scholar.
+              Now I am pursuing an MS in Information Systems at New York University while building AI-native legal tools at Legali AI,
+              where I design backend orchestration, LLM routing, streaming interfaces, multi-tenant APIs, RBAC, and billing systems.
             </p>
             <p className="text-gray-300 text-lg leading-relaxed mb-6">
-              I'm passionate about bridging enterprise-scale engineering with cutting-edge AI, building things
-              that are both robust and intelligent.
+              I am most interested in the engineering layer where reliable distributed systems meet applied AI: routing,
+              orchestration, observability, cost control, and interfaces that make complex workflows feel fast.
             </p>
             <p className="text-gray-300 text-lg leading-relaxed">
               When I'm not coding, you'll find me running, hiking, or chasing quiet views.
@@ -280,42 +286,64 @@ const Home = (): JSX.Element => {
           </div>
           <div className="max-w-4xl scroll-reveal" style={{ transitionDelay: '0.1s' }}>
             <ExperienceAccordion
-              role="Software Engineer @ Legali AI"
+              role="Senior Software Engineer @ Legali AI"
               period="Nov 2025 – Present"
-              description="Consolidated 15 chained microservices into a deterministic state machine, cutting end-to-end turn latency from 3–8s to 1–2s. Designed a Python intent classification router with Redis caching that reduced API latency by 35% and per-session compute cost by 70%. Built WebSocket and SSE layers for a real-time voice assistant and streaming response interface. Designed REST APIs for a multi-tenant SaaS platform with role-based permissions and tiered Stripe billing."
-              tech={['Go', 'TypeScript', 'Cloudflare Workers', 'Python', 'Redis', 'WebSocket', 'SSE', 'Stripe']}
+              description="Building backend orchestration for AI-native legal workflows at an early-stage legal AI startup."
+              highlights={[
+                'Architected FastAPI workflow orchestration that chains intent classification, document analysis, and drafting into guided legal-case flows.',
+                'Designed a Redis-cached intent router that gates LLM calls, cutting API latency by 35% and per-session inference cost by 70%.',
+                'Launched multi-tenant REST APIs with RBAC and Stripe billing across 3 pricing tiers, moving the platform from free-only to its first paid customers.',
+                'Engineered WebSocket and streaming layers for a real-time voice assistant, increasing average live intake session length by 15%.',
+              ]}
+              tech={['Python', 'FastAPI', 'Redis', 'REST APIs', 'WebSockets', 'LLM Routing', 'RBAC', 'Stripe']}
               location="Remote – San Francisco"
-              website="https://legali.ai/"
+              website="legali.ai"
               isOpen={openExperience === 0}
               onToggle={() => toggleExperience(0)}
             />
             <ExperienceAccordion
-              role="Product Engineer @ Telkomsel"
+              role="Software Engineer @ Telkomsel"
               period="Jan 2022 – Sep 2024"
-              description="Led development of a PoS system that improved transaction speed by 29%. Transitioned architecture to microservices, accelerating development cycles by 40%. Built a voucher system that doubled revenue. Drove 17% engagement improvement through A/B testing."
-              tech={['Java', 'PostgreSQL', 'Docker', 'Azure DevOps', 'Firebase', 'Microservices']}
-              location="Jakarta, Indonesia"
-              website="https://www.telkomsel.com"
+              description="Built transaction-heavy backend systems for Indonesia's largest mobile operator, supporting retail, voucher, and payment workflows."
+              highlights={[
+                'Led cross-team delivery for a Java Spring Boot/PostgreSQL distributed POS system across 5 teams, increasing peak-load throughput by 29% and reducing checkout failures by 40%.',
+                'Built a voucher distribution system processing 2M+ monthly transactions and supporting higher voucher activation volume.',
+                'Led architecture reviews for payment gateway services handling 500+ TPS at peak, aligning tradeoffs across teams to ship 2 major releases on schedule.',
+                'Owned Prometheus/Grafana observability across 5+ payment services, reducing incident detection time from hours to minutes.',
+              ]}
+              tech={['Java', 'Spring Boot', 'PostgreSQL', 'Docker', 'API Gateway', 'Prometheus', 'Grafana']}
+              location="Indonesia"
+              website="www.telkomsel.com"
               isOpen={openExperience === 1}
               onToggle={() => toggleExperience(1)}
             />
             <ExperienceAccordion
               role="Associate Software Engineer @ Tokopedia"
               period="Apr 2021 – Jan 2022"
-              description="Built a real-time ML feedback platform using Kafka. Streamlined A/B testing workflow, cutting experiment setup time by 50%. Implemented zero-downtime deployment strategies. Optimized FAISS-based recommendation system, improving CTR by 3%."
-              tech={['Golang', 'Kafka', 'FAISS', 'Cassandra', 'Linux']}
-              location="Jakarta, Indonesia"
-              website="https://www.tokopedia.com"
+              description="Worked on experimentation and recommendation infrastructure for Indonesia's first e-commerce unicorn."
+              highlights={[
+                'Engineered a config-driven Go backend for A/B experiment management, replacing multi-minute deploy cycles with near-instant config updates across 5+ active experiments.',
+                'Optimized large-dataset retrieval across 100M+ user profiles using FAISS vector search and Cassandra query tuning, lifting recommendation CTR by 3%.',
+                'Architected a Kafka real-time ML feedback pipeline delivering sub-minute model signals to recommendation systems serving 100M+ monthly users.',
+              ]}
+              tech={['Go', 'Kafka', 'FAISS', 'Cassandra', 'A/B Testing', 'ML Systems']}
+              location="Indonesia"
+              website="www.tokopedia.com"
               isOpen={openExperience === 2}
               onToggle={() => toggleExperience(2)}
             />
             <ExperienceAccordion
               role="Junior Software Engineer @ Pinhome"
               period="Jul 2020 – Apr 2021"
-              description="Automated iOS deployment with GitLab CI/CD and Fastlane, cutting release times by 70%. Reduced bugs by 60% with test coverage tooling and improved property search speed by optimizing Elasticsearch."
-              tech={['CI/CD', 'Fastlane', 'Flutter', 'Elasticsearch', 'Python']}
-              location="Jakarta, Indonesia"
-              website="https://www.pinhome.id"
+              description="Improved search and release workflows for an Indonesian proptech platform."
+              highlights={[
+                'Tuned Elasticsearch indexing and query patterns, cutting search response times by 20% on the consumer-facing property search API.',
+                'Automated mobile release workflows with GitLab CI/CD and Fastlane, reducing release-day engineering time.',
+                'Added line-level test coverage visibility to merge requests, helping reduce QA rejection on mobile tickets.',
+              ]}
+              tech={['Elasticsearch', 'GitLab CI/CD', 'Fastlane', 'Flutter', 'Python']}
+              location="Indonesia"
+              website="www.pinhome.id"
               isOpen={openExperience === 3}
               onToggle={() => toggleExperience(3)}
             />
@@ -361,7 +389,7 @@ const Home = (): JSX.Element => {
                   <p className="text-teal font-medium mb-2">MS in Information Systems</p>
                   <p className="text-gray-300 text-sm mb-3">GPA: 3.8 / 4.0</p>
                   <p className="text-gray-500 text-sm">
-                    <span className="text-gray-300 font-medium">Relevant Courses:</span> Operating Systems, Database Systems, Machine Learning, Predictive Analytics
+                    <span className="text-gray-300 font-medium">Relevant Courses:</span> Operating Systems, Database Systems, Machine Learning, Predictive Analytics, Distributed Systems
                   </p>
                 </div>
               </div>
@@ -400,7 +428,7 @@ const Home = (): JSX.Element => {
           </div>
           <div className="max-w-2xl scroll-reveal" style={{ transitionDelay: '0.1s' }}>
             <p className="text-gray-300 text-lg mb-10 leading-relaxed">
-              If you want to build something ambitious, or you’re in NYC and want to talk systems over a run, reach out.
+              If you want to build reliable backend systems, AI-native products, or transaction-heavy platforms, reach out.
             </p>
             <div className="flex flex-col sm:flex-row items-start gap-6 mb-10">
               <div className="flex items-center gap-2 text-gray-300">
@@ -410,11 +438,11 @@ const Home = (): JSX.Element => {
             </div>
             <div className="flex flex-wrap gap-4">
               <a
-                href="mailto:mfarhan0304@gmail.com"
+                href="mailto:m.farhan@nyu.edu"
                 className="btn-primary inline-flex items-center gap-2"
               >
                 <Mail size={20} />
-                Let's Collaborate!
+                m.farhan@nyu.edu
               </a>
               <a
                 href="https://github.com/mfarhan0304"

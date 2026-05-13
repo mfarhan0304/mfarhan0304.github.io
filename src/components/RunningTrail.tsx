@@ -29,10 +29,10 @@ const RunningTrail = (): JSX.Element => {
     drawnPath.style.strokeDashoffset = `${totalLength}`;
 
     let ticking = false;
-    const onScroll = () => {
+    const onScroll = (): void => {
       if (ticking) return;
       ticking = true;
-      requestAnimationFrame(() => {
+      requestAnimationFrame((): void => {
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
         const progress = docHeight > 0 ? Math.max(0, Math.min(1, window.scrollY / docHeight)) : 0;
 
@@ -50,7 +50,7 @@ const RunningTrail = (): JSX.Element => {
 
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll(); // initial position
-    return () => window.removeEventListener('scroll', onScroll);
+    return (): void => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (

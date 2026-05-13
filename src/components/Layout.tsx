@@ -1,4 +1,5 @@
-import { ReactNode, useState, useEffect, useRef } from 'react';
+import type { ReactNode } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import RunningTrail from './RunningTrail';
 
@@ -20,7 +21,6 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [hasCursor, setHasCursor] = useState(false);
-  const rafRef = useRef<number | null>(null);
 
   // Cursor spotlight — set CSS custom properties directly on DOM (no re-renders)
   useEffect(() => {
@@ -29,10 +29,10 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
     if (!canHover) return;
 
     let ticking = false;
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseMove = (e: MouseEvent): void => {
       if (ticking) return;
       ticking = true;
-      requestAnimationFrame(() => {
+      requestAnimationFrame((): void => {
         document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
         document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
         ticking = false;
@@ -40,16 +40,16 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    return (): void => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   // Scroll: active section + progress bar
   useEffect(() => {
     let ticking = false;
-    const handleScroll = () => {
+    const handleScroll = (): void => {
       if (ticking) return;
       ticking = true;
-      requestAnimationFrame(() => {
+      requestAnimationFrame((): void => {
         setScrolled(window.scrollY > 20);
 
         // Scroll progress
@@ -74,9 +74,8 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
+    return (): void => {
       window.removeEventListener('scroll', handleScroll);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, []);
 

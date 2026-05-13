@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { Github, ExternalLink, Code2, X, LayoutGrid } from 'lucide-react';
 
-const slugify = (title: string) =>
+const slugify = (title: string): string =>
   title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 interface GalleryProject {
@@ -25,10 +25,10 @@ const useMediaQuery = (breakpoint: number): boolean => {
 
   useEffect(() => {
     const mql = window.matchMedia(`(min-width: ${breakpoint}px)`);
-    const handler = (e: MediaQueryListEvent) => setMatches(e.matches);
+    const handler = (e: MediaQueryListEvent): void => setMatches(e.matches);
     setMatches(mql.matches);
     mql.addEventListener('change', handler);
-    return () => mql.removeEventListener('change', handler);
+    return (): void => mql.removeEventListener('change', handler);
   }, [breakpoint]);
 
   return matches;
@@ -43,7 +43,7 @@ const ProjectsModal = ({
   projects: GalleryProject[];
   isOpen: boolean;
   onClose: () => void;
-}) => {
+}): JSX.Element | null => {
   const [activeCategory, setActiveCategory] = useState<string>('All');
 
   // Gather unique categories
@@ -63,7 +63,7 @@ const ProjectsModal = ({
     } else {
       document.body.style.overflow = '';
     }
-    return () => {
+    return (): void => {
       document.body.style.overflow = '';
     };
   }, [isOpen]);
@@ -71,11 +71,11 @@ const ProjectsModal = ({
   // Close on Escape
   useEffect(() => {
     if (!isOpen) return;
-    const handleKey = (e: KeyboardEvent) => {
+    const handleKey = (e: KeyboardEvent): void => {
       if (e.key === 'Escape') onClose();
     };
     window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
+    return (): void => window.removeEventListener('keydown', handleKey);
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
@@ -207,10 +207,10 @@ const MuseumGallery = ({ projects, featuredCount = 3 }: MuseumGalleryProps): JSX
     if (!isDesktop) return;
 
     let ticking = false;
-    const onScroll = () => {
+    const onScroll = (): void => {
       if (ticking) return;
       ticking = true;
-      requestAnimationFrame(() => {
+      requestAnimationFrame((): void => {
         if (!containerRef.current) {
           ticking = false;
           return;
@@ -237,10 +237,10 @@ const MuseumGallery = ({ projects, featuredCount = 3 }: MuseumGalleryProps): JSX
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    return (): void => window.removeEventListener('scroll', onScroll);
   }, [isDesktop, featured.length]);
 
-  const formatIndex = (i: number) =>
+  const formatIndex = (i: number): string =>
     `${String(i + 1).padStart(2, '0')} / ${String(featured.length).padStart(2, '0')}`;
 
   const viewAllButton = (
@@ -262,7 +262,7 @@ const MuseumGallery = ({ projects, featuredCount = 3 }: MuseumGalleryProps): JSX
 
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
-    const navigate = () => {
+    const navigate = (): void => {
       // Read from window directly to avoid stale closure over isDesktop state
       if (window.innerWidth < 768) {
         const el = document.getElementById(hash);
